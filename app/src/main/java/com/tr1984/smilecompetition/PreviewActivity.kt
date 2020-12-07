@@ -3,6 +3,7 @@ package com.tr1984.smilecompetition
 import android.os.Bundle
 import android.util.Log
 import android.util.Size
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageAnalysis
@@ -11,6 +12,7 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import com.tr1984.smilecompetition.databinding.ActivityPreviewBinding
 import com.tr1984.smilecompetition.util.ImageProcessor
+import kotlin.math.min
 
 class PreviewActivity : AppCompatActivity() {
 
@@ -26,6 +28,7 @@ class PreviewActivity : AppCompatActivity() {
     }
     private var cameraProvider: ProcessCameraProvider? = null
     private var imageProcessor: ImageProcessor? = null
+    private var startTimestamp = Long.MAX_VALUE
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,10 +87,19 @@ class PreviewActivity : AppCompatActivity() {
             val rotationDegrees = image.imageInfo.rotationDegrees
             Log.d("1984tr", "(w, h) -> ($w, $h), rotationDegrees: $rotationDegrees")
             imageProcessor?.process(image) { left, right, smiling ->
-                if (smiling ?: 0.0f < 0.7f) {
-                    binding.lblStatus.text = "웃어요!"
+                if (smiling ?: 0.0f > 0.8f) {
+                    if (startTimestamp == Long.MAX_VALUE) {
+                        startTimestamp = System.currentTimeMillis()
+                    } else {
+                        val progress = min(((System.currentTimeMillis() - startTimestamp) / 1000).toInt(), binding.progress.max)
+                        binding.progress.progress = progress
+                        if (progress >= binding.progress.max) {
+                            Toast.makeText(this, "오늘도 예뻐졌네요.", Toast.LENGTH_SHORT).show()
+                        }
+                    }
                 } else {
-                    binding.lblStatus.text = "아이 예뻐!"
+                    startTimestamp == Long.MAX_VALUE
+                    binding.progress.progress = 0
                 }
             }
         })
