@@ -1,5 +1,6 @@
 package com.tr1984.smilecompetition
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.util.Size
@@ -35,6 +36,7 @@ class PreviewActivity : AppCompatActivity() {
         ActivityPreviewBinding.inflate(layoutInflater)
                 .apply {
                     closeBtn.setOnClickListener { finish() }
+                    calendarBtn.setOnClickListener { moveToCalendar() }
                 }.also {
                     binding = it
                 }.run {
@@ -82,28 +84,29 @@ class PreviewActivity : AppCompatActivity() {
         imageProcessor = ImageProcessor(this)
 
         imageAnalysis.setAnalyzer(ContextCompat.getMainExecutor(this), { image ->
-            val w = image.width
-            val h = image.height
-            val rotationDegrees = image.imageInfo.rotationDegrees
-            Log.d("1984tr", "(w, h) -> ($w, $h), rotationDegrees: $rotationDegrees")
             imageProcessor?.process(image) { left, right, smiling ->
                 if (smiling ?: 0.0f > 0.8f) {
                     if (startTimestamp == Long.MAX_VALUE) {
                         startTimestamp = System.currentTimeMillis()
                     } else {
-                        val progress = min(((System.currentTimeMillis() - startTimestamp) / 1000).toInt(), binding.progress.max)
+                        val progress = min((System.currentTimeMillis() - startTimestamp).toInt(), binding.progress.max)
                         binding.progress.progress = progress
                         if (progress >= binding.progress.max) {
-                            Toast.makeText(this, "오늘도 예뻐졌네요.", Toast.LENGTH_SHORT).show()
+                            moveToCalendar()
+                            finish()
                         }
                     }
                 } else {
-                    startTimestamp == Long.MAX_VALUE
+                    startTimestamp = Long.MAX_VALUE
                     binding.progress.progress = 0
                 }
             }
         })
 
         provider.bindToLifecycle(this, cameraSelector, imageAnalysis)
+    }
+
+    private fun moveToCalendar() {
+        startActivity(Intent(this, CalendarActivity::class.java))
     }
 }

@@ -22,20 +22,59 @@
 
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/close_btn"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
             android:background="@null"
+            android:padding="12dp"
+            android:scaleType="fitXY"
             android:src="@drawable/btn_close"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/calendar_btn"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:background="@null"
+            android:padding="12dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/btn_calendar"
+            app:layout_constraintTop_toBottomOf="@id/close_btn"
+            app:layout_constraintEnd_toEndOf="@id/close_btn"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/label1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:fontFamily="@font/nanum"
+            android:padding="2dp"
+            android:text="웃어봐요"
+            android:textColor="@color/navy"
+            android:layout_marginBottom="4dp"
+            app:layout_constraintBottom_toTopOf="@id/label2"
+            app:layout_constraintStart_toStartOf="@id/label2" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/label2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:background="@color/white"
+            android:fontFamily="@font/nanum"
+            android:padding="2dp"
+            android:text="더 예뻐질거에요."
+            android:textColor="@color/navy"
+            app:layout_constraintBottom_toTopOf="@id/progress"
+            app:layout_constraintStart_toStartOf="@id/progress" />
 
         <ProgressBar
             android:id="@+id/progress"
             style="@style/Widget.AppCompat.ProgressBar.Horizontal"
             android:layout_width="0dp"
-            android:layout_height="24dp"
+            android:layout_height="16dp"
             android:layout_margin="16dp"
-            android:max="3"
+            android:max="10000"
             android:progress="0"
             android:progressDrawable="@drawable/bg_progress"
             app:layout_constraintBottom_toBottomOf="parent"

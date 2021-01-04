@@ -9,11 +9,11 @@
                 </shape>
             </item>
             <item
-                android:bottom="4dp"
-                android:drawable="@drawable/ic_close"
-                android:left="4dp"
-                android:right="4dp"
-                android:top="4dp" />
+                android:bottom="8dp"
+                android:drawable="@drawable/ic_calendar"
+                android:left="8dp"
+                android:right="8dp"
+                android:top="8dp" />
         </layer-list>
     </item>
     <item android:id="@android:id/background">
@@ -24,11 +24,11 @@
                 </shape>
             </item>
             <item
-                android:bottom="4dp"
-                android:drawable="@drawable/ic_close"
-                android:left="4dp"
-                android:right="4dp"
-                android:top="4dp" />
+                android:bottom="8dp"
+                android:drawable="@drawable/ic_calendar"
+                android:left="8dp"
+                android:right="8dp"
+                android:top="8dp" />
         </layer-list>
     </item>
 </ripple>

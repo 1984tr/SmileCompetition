@@ -2,7 +2,6 @@ package com.tr1984.smilecompetition.util
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.util.Log
 import androidx.camera.core.ImageProxy
 import com.google.android.gms.tasks.TaskExecutors
 import com.google.mlkit.vision.common.InputImage
@@ -48,7 +47,6 @@ class ImageProcessor(context: Context) {
         val input = InputImage.fromMediaImage(img, image.imageInfo.rotationDegrees)
         detector.process(input).addOnSuccessListener(executor) { results ->
             for (face in results) {
-                Log.d("1984tr", "left: ${face.leftEyeOpenProbability}, right: ${face.rightEyeOpenProbability}, smiling: ${face.smilingProbability}")
                 callback.invoke(face.leftEyeOpenProbability, face.rightEyeOpenProbability, face.smilingProbability)
             }
         }.addOnFailureListener(executor) { e ->
