@@ -15,6 +15,7 @@ import com.tr1984.smilecompetition.data.BePrettyDatabase
 import com.tr1984.smilecompetition.data.Smiling
 import com.tr1984.smilecompetition.databinding.ActivityCalendarBinding
 import com.tr1984.smilecompetition.databinding.ItemCalendarBinding
+import com.tr1984.smilecompetition.util.ViewModelFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -25,7 +26,9 @@ class CalendarActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(CalendarViewModel::class.java)
+        viewModel = ViewModelProvider(this, ViewModelFactory(BePrettyDatabase.getInstance(this)))
+            .get(CalendarViewModel::class.java)
+
         setContentView(
             ActivityCalendarBinding.inflate(layoutInflater)
                 .apply {
