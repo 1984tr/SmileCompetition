@@ -36,7 +36,7 @@ class PreviewActivity : AppCompatActivity() {
         ActivityPreviewBinding.inflate(layoutInflater)
                 .apply {
                     closeBtn.setOnClickListener { finish() }
-                    calendarBtn.setOnClickListener { moveToCalendar() }
+                    calendarBtn.setOnClickListener { moveToCalendar(false) }
                 }.also {
                     binding = it
                 }.run {
@@ -92,7 +92,7 @@ class PreviewActivity : AppCompatActivity() {
                         val progress = min((System.currentTimeMillis() - startTimestamp).toInt(), binding.progress.max)
                         binding.progress.progress = progress
                         if (progress >= binding.progress.max) {
-                            moveToCalendar()
+                            moveToCalendar(true)
                             finish()
                         }
                     }
@@ -106,7 +106,9 @@ class PreviewActivity : AppCompatActivity() {
         provider.bindToLifecycle(this, cameraSelector, imageAnalysis)
     }
 
-    private fun moveToCalendar() {
-        startActivity(Intent(this, CalendarActivity::class.java))
+    private fun moveToCalendar(withInsert: Boolean) {
+        startActivity(Intent(this, CalendarActivity::class.java).apply {
+            putExtra("withInsert", withInsert)
+        })
     }
 }

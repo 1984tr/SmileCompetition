@@ -2,22 +2,18 @@ package com.tr1984.smilecompetition
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import androidx.room.withTransaction
 import com.tr1984.smilecompetition.data.BePrettyDatabase
 import com.tr1984.smilecompetition.data.Smiling
 import com.tr1984.smilecompetition.databinding.ActivityCalendarBinding
 import com.tr1984.smilecompetition.databinding.ItemCalendarBinding
-import com.tr1984.smilecompetition.util.ViewModelFactory
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 
 class CalendarActivity : AppCompatActivity() {
 
@@ -26,8 +22,14 @@ class CalendarActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this, ViewModelFactory(BePrettyDatabase.getInstance(this)))
-            .get(CalendarViewModel::class.java)
+
+        viewModel = ViewModelProvider(
+            this,
+            CalendarViewModelFactory(
+                BePrettyDatabase.getInstance(this),
+                intent.getBooleanExtra("withInsert", false)
+            )
+        ).get(CalendarViewModel::class.java)
 
         setContentView(
             ActivityCalendarBinding.inflate(layoutInflater)
@@ -37,9 +39,10 @@ class CalendarActivity : AppCompatActivity() {
 
                     btnClose.setOnClickListener { finish() }
 
-                    recyclerview.adapter = CalendarAdapter(this@CalendarActivity, this@CalendarActivity.viewModel)
+                    recyclerview.adapter =
+                        CalendarAdapter(this@CalendarActivity, this@CalendarActivity.viewModel)
                 }.also {
-                   binding = it
+                    binding = it
                 }.root
         )
     }
@@ -82,6 +85,20 @@ class CalendarActivity : AppCompatActivity() {
                 }
             }
 
+        }
+    }
+
+    class CalendarViewModelFactory(
+        private val db: BePrettyDatabase,
+        private val withInsert: Boolean
+    ) : ViewModelProvider.Factory {
+
+        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+            return if (modelClass.isAssignableFrom(CalendarViewModel::class.java)) {
+                CalendarViewModel(db, withInsert) as T
+            } else {
+                throw IllegalArgumentException()
+            }
         }
     }
 }
