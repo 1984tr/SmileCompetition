@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "4ff803259a244abc5a7b15edb05f8558",
+    "identityHash": "695be928ce2553b00cbc1dedee980716",
     "entities": [
       {
         "tableName": "smiling",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `checkIn` INTEGER NOT NULL, `createdAt` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `checkIn` INTEGER NOT NULL, `createdAt` INTEGER)",
         "fields": [
           {
             "fieldPath": "id",
@@ -24,7 +24,7 @@
             "fieldPath": "createdAt",
             "columnName": "createdAt",
             "affinity": "INTEGER",
-            "notNull": true
+            "notNull": false
           }
         ],
         "primaryKey": {
@@ -49,7 +49,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '4ff803259a244abc5a7b15edb05f8558')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '695be928ce2553b00cbc1dedee980716')"
     ]
   }
 }

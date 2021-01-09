@@ -3,6 +3,7 @@ package com.tr1984.smilecompetition.data
 import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import java.util.*
 
 @Database(entities = [Smiling::class], version = 1)
 @TypeConverters(Converters::class)
@@ -29,6 +30,9 @@ interface SmilingDao {
 
     @Query("SELECT * FROM smiling ORDER BY createdAt DESC")
     suspend fun getAll(): List<Smiling>
+
+    @Query("SELECT * FROM smiling WHERE createdAt = :date LIMIT 1")
+    suspend fun get(date: Date): Smiling?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(smiling: Smiling)
