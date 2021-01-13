@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+option java_package = "com.tr1984.smilecompetition";
+option java_multiple_files = true;
+
+message SmileConfiguration {
+  int64 time = 15;
+}
