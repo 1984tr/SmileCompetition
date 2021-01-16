@@ -2,16 +2,13 @@ package com.tr1984.smilecompetition
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.util.Size
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
-import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.preferencesKey
 import androidx.datastore.preferences.createDataStore
 import androidx.lifecycle.lifecycleScope
@@ -45,7 +42,7 @@ class PreviewActivity : AppCompatActivity() {
             .apply {
                 closeBtn.setOnClickListener { finish() }
                 calendarBtn.setOnClickListener { moveToCalendar(false) }
-                timerBtn.setOnClickListener { showTimerDialog() }
+                settingBtn.setOnClickListener { moveToSetting() }
             }.also {
                 binding = it
             }.run {
@@ -64,7 +61,6 @@ class PreviewActivity : AppCompatActivity() {
             val preferences = dataStore.data.first()
             val key = preferencesKey<Long>("timer")
             val timer = preferences[key] ?: 10000L
-            Log.d("1984tr", "get timer: $timer")
             binding.progress.max = timer.toInt()
         }
     }
@@ -91,7 +87,6 @@ class PreviewActivity : AppCompatActivity() {
         preview.setSurfaceProvider(binding.previewView.surfaceProvider)
 
         provider.bindToLifecycle(this, cameraSelector, preview)
-
 
         val imageAnalysis = ImageAnalysis.Builder()
             .setTargetResolution(targetResolution)
@@ -132,29 +127,8 @@ class PreviewActivity : AppCompatActivity() {
         })
     }
 
-    private fun showTimerDialog() {
-        AlertDialog.Builder(this)
-            .setItems(timers.map { it.first }.toTypedArray()) { dialogInterface, position ->
-                val timer = timers[position].second
-                Log.d("1984tr", "set timer: $timer")
-                lifecycleScope.launch {
-                    dataStore.edit {
-                        val key = preferencesKey<Long>("timer")
-                        it[key] = timer.toLong()
-                    }
-                    binding.progress.max = timer
+    private fun moveToSetting() {
+        startActivity(Intent(this, ConfigActivity::class.java))
 
-                }
-            }.create().show()
-    }
-
-    companion object {
-        val timers = listOf(
-            "5s" to 5 * 1000,
-            "7s" to 7 * 1000,
-            "10s" to 10 * 1000,
-            "15s" to 15 * 1000,
-            "20s" to 20 * 1000
-        )
     }
 }

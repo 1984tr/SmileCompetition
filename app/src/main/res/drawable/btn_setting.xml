@@ -25,7 +25,7 @@
             </item>
             <item
                 android:bottom="8dp"
-                android:drawable="@drawable/ic_timer"
+                android:drawable="@drawable/ic_setting"
                 android:left="8dp"
                 android:right="8dp"
                 android:top="8dp" />

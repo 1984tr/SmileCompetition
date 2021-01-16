@@ -45,13 +45,13 @@
             app:layout_constraintEnd_toEndOf="@id/close_btn"/>
 
         <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/timer_btn"
+            android:id="@+id/setting_btn"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:background="@null"
             android:padding="6dp"
             android:scaleType="fitXY"
-            android:src="@drawable/btn_timer"
+            android:src="@drawable/btn_setting"
             app:layout_constraintTop_toBottomOf="@id/calendar_btn"
             app:layout_constraintEnd_toEndOf="@id/calendar_btn"/>
 

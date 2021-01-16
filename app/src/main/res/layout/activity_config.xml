@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.tr1984.smilecompetition.ConfigViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/btn_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="24dp"
+            android:layout_marginBottom="36dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:fontFamily="@font/nanum"
+            android:text="닫기"
+            android:textColor="@color/navy"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@color/navy"
+            app:layout_constraintEnd_toEndOf="@id/btn_close"
+            app:layout_constraintStart_toStartOf="@id/btn_close"
+            app:layout_constraintTop_toBottomOf="@id/btn_close" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
