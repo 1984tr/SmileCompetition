@@ -44,7 +44,7 @@
             android:fontFamily="@font/nanum"
             android:text="몇 초 동안 예뻐질까요?"
             android:textColor="@color/navy"
-            android:textSize="24sp"
+            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/btn_close" />
 
@@ -56,107 +56,389 @@
             android:fontFamily="@font/nanum"
             android:text="5s"
             android:textColor="@color/navy"
-            android:textSize="48sp"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginLeft="48dp"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="@id/label_duration"
             app:layout_constraintTop_toBottomOf="@id/label_duration" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/duration_7s"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
             android:fontFamily="@font/nanum"
             android:text="7s"
             android:textColor="@color/navy"
-            android:textSize="48sp"
+            android:textSize="24sp"
             app:layout_constraintStart_toEndOf="@id/duration_5s"
-            app:layout_constraintEnd_toStartOf="@id/duration_10s"
             app:layout_constraintTop_toTopOf="@id/duration_5s" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/duration_10s"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="48dp"
+            android:layout_marginLeft="16dp"
             android:fontFamily="@font/nanum"
             android:text="10s"
             android:textColor="@color/navy"
-            android:textSize="48sp"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:textSize="24sp"
+            app:layout_constraintStart_toEndOf="@id/duration_7s"
             app:layout_constraintTop_toTopOf="@id/duration_7s" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/duration_15s"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
             android:fontFamily="@font/nanum"
-            android:text="15s"
+            android:text="10s"
             android:textColor="@color/navy"
-            android:textSize="48sp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintStart_toStartOf="@id/duration_5s"
-            app:layout_constraintTop_toBottomOf="@id/duration_5s" />
+            android:textSize="24sp"
+            app:layout_constraintStart_toEndOf="@id/duration_10s"
+            app:layout_constraintTop_toTopOf="@id/duration_10s" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/duration_20s"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
             android:fontFamily="@font/nanum"
-            android:text="20s"
+            android:text="10s"
             android:textColor="@color/navy"
-            android:textSize="48sp"
-            app:layout_constraintStart_toStartOf="@id/duration_7s"
+            android:textSize="24sp"
+            app:layout_constraintStart_toEndOf="@id/duration_15s"
             app:layout_constraintTop_toTopOf="@id/duration_15s" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/label_alarm"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
             android:layout_marginTop="72dp"
+            android:layout_marginEnd="24dp"
             android:fontFamily="@font/nanum"
             android:text="언제 알람을 드릴까요?"
             android:textColor="@color/navy"
-            android:layout_marginLeft="24dp"
-            android:textSize="24sp"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/duration_15s" />
 
+        <LinearLayout
+            android:id="@+id/hour_cont"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="@id/label_alarm"
+            app:layout_constraintStart_toStartOf="@id/label_alarm"
+            app:layout_constraintTop_toBottomOf="@id/label_alarm">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/nanum"
+                android:gravity="center"
+                android:text="0"
+                android:textColor="@color/navy"
+                android:textSize="24sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/nanum"
+                android:gravity="center"
+                android:text="1"
+                android:textColor="@color/navy"
+                android:textSize="24sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/nanum"
+                android:gravity="center"
+                android:text="2"
+                android:textColor="@color/navy"
+                android:textSize="24sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/nanum"
+                android:gravity="center"
+                android:text="3"
+                android:textColor="@color/navy"
+                android:textSize="24sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/nanum"
+                android:gravity="center"
+                android:text="4"
+                android:textColor="@color/navy"
+                android:textSize="24sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/nanum"
+                android:gravity="center"
+                android:text="5"
+                android:textColor="@color/navy"
+                android:textSize="24sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/nanum"
+                android:gravity="center"
+                android:text="6"
+                android:textColor="@color/navy"
+                android:textSize="24sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/nanum"
+                android:gravity="center"
+                android:text="7"
+                android:textColor="@color/navy"
+                android:textSize="24sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/nanum"
+                android:gravity="center"
+                android:text="8"
+                android:textColor="@color/navy"
+                android:textSize="24sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/nanum"
+                android:gravity="center"
+                android:text="9"
+                android:textColor="@color/navy"
+                android:textSize="24sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/nanum"
+                android:gravity="center"
+                android:text="10"
+                android:textColor="@color/navy"
+                android:textSize="24sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/nanum"
+                android:gravity="center"
+                android:text="11"
+                android:textColor="@color/navy"
+                android:textSize="24sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/nanum"
+                android:gravity="center"
+                android:text="12"
+                android:textColor="@color/navy"
+                android:textSize="24sp" />
+        </LinearLayout>
+
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/label_hour"
+            android:id="@+id/label_clon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:fontFamily="@font/nanum"
-            android:text="00"
-            android:textColor="@color/navy"
-            android:textSize="56sp"
-            android:layout_marginLeft="48dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/label_alarm" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/label_colon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/nanum"
-            android:layout_marginLeft="8dp"
+            android:gravity="center"
             android:text=":"
             android:textColor="@color/navy"
-            android:textSize="56sp"
-            app:layout_constraintTop_toTopOf="@id/label_hour"
-            app:layout_constraintStart_toEndOf="@id/label_hour"/>
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="@id/hour_cont"
+            app:layout_constraintStart_toStartOf="@id/hour_cont"
+            app:layout_constraintTop_toBottomOf="@id/hour_cont" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/label_min"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/min_cont"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/nanum"
-            android:layout_marginLeft="8dp"
-            android:text="00"
-            android:textColor="@color/navy"
-            android:textSize="56sp"
-            app:layout_constraintTop_toTopOf="@id/label_colon"
-            app:layout_constraintStart_toEndOf="@id/label_colon"/>
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="@id/hour_cont"
+            app:layout_constraintStart_toStartOf="@id/hour_cont"
+            app:layout_constraintTop_toBottomOf="@id/label_clon">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/nanum"
+                android:gravity="center"
+                android:text="0"
+                android:textColor="@color/navy"
+                android:textSize="24sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/nanum"
+                android:gravity="center"
+                android:text="5"
+                android:textColor="@color/navy"
+                android:textSize="24sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/nanum"
+                android:gravity="center"
+                android:text="10"
+                android:textColor="@color/navy"
+                android:textSize="24sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/nanum"
+                android:gravity="center"
+                android:text="15"
+                android:textColor="@color/navy"
+                android:textSize="24sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/nanum"
+                android:gravity="center"
+                android:text="20"
+                android:textColor="@color/navy"
+                android:textSize="24sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/nanum"
+                android:gravity="center"
+                android:text="25"
+                android:textColor="@color/navy"
+                android:textSize="24sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/nanum"
+                android:gravity="center"
+                android:text="30"
+                android:textColor="@color/navy"
+                android:textSize="24sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/nanum"
+                android:gravity="center"
+                android:text="35"
+                android:textColor="@color/navy"
+                android:textSize="24sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/nanum"
+                android:gravity="center"
+                android:text="40"
+                android:textColor="@color/navy"
+                android:textSize="24sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/nanum"
+                android:gravity="center"
+                android:text="45"
+                android:textColor="@color/navy"
+                android:textSize="24sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/nanum"
+                android:gravity="center"
+                android:text="50"
+                android:textColor="@color/navy"
+                android:textSize="24sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/nanum"
+                android:gravity="center"
+                android:text="55"
+                android:textColor="@color/navy"
+                android:textSize="24sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ampm_cont"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="@id/hour_cont"
+            app:layout_constraintStart_toStartOf="@id/hour_cont"
+            app:layout_constraintTop_toBottomOf="@id/min_cont">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/nanum"
+                android:gravity="center"
+                android:text="AM"
+                android:textColor="@color/navy"
+                android:textSize="24sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/nanum"
+                android:gravity="center"
+                android:text="PM"
+                android:textColor="@color/navy"
+                android:textSize="24sp" />
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
