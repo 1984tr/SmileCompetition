@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.tr1984.smilecompetition.ConfigViewModel" />
+            type="com.tr1984.smilecompetition.page.ConfigViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

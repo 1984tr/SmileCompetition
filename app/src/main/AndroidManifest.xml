@@ -20,7 +20,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SmileCompetition">
         <activity
-            android:name=".MainActivity"
+            android:name=".page.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,15 +30,15 @@
         </activity>
 
         <activity
-            android:name=".PreviewActivity"
+            android:name=".page.PreviewActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".CalendarActivity"
+            android:name=".page.CalendarActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".ConfigActivity"
+            android:name=".page.ConfigActivity"
             android:screenOrientation="portrait" />
 
         <meta-data

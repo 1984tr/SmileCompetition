@@ -1,4 +1,4 @@
-package com.tr1984.smilecompetition
+package com.tr1984.smilecompetition.page
 
 import android.os.Bundle
 import android.view.LayoutInflater

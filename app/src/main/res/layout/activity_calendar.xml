@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.tr1984.smilecompetition.CalendarViewModel" />
+            type="com.tr1984.smilecompetition.page.CalendarViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

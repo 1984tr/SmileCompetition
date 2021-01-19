@@ -1,4 +1,4 @@
-package com.tr1984.smilecompetition
+package com.tr1984.smilecompetition.page
 
 import android.util.Log
 import androidx.lifecycle.LiveData

@@ -1,4 +1,4 @@
-package com.tr1984.smilecompetition
+package com.tr1984.smilecompetition.page
 
 import android.content.Intent
 import android.content.pm.PackageManager
