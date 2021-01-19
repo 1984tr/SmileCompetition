@@ -38,7 +38,7 @@ class NotifyHelper(context: Context) {
                 .setContentIntent(pi)
         notificationManager.notify(9876, builder.build())
     }
-    
+
     private fun createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val notificationChannel =
