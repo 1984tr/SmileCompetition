@@ -2,7 +2,10 @@ package com.tr1984.smilecompetition.page
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.createDataStore
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.tr1984.smilecompetition.databinding.ActivityConfigBinding
 
@@ -16,7 +19,10 @@ class ConfigActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewModel = ViewModelProvider(this).get(ConfigViewModel::class.java)
+        viewModel = ViewModelProvider(
+            this,
+            ConfigViewModelFactory(dataStore)
+        ).get(ConfigViewModel::class.java)
 
         setContentView(ActivityConfigBinding.inflate(layoutInflater)
             .apply {
@@ -27,6 +33,20 @@ class ConfigActivity : AppCompatActivity() {
 
             }.also {
                 binding = it
-            }.root)
+            }.root
+        )
+    }
+
+    class ConfigViewModelFactory(
+        private val dataStore: DataStore<Preferences>
+    ) : ViewModelProvider.Factory {
+
+        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+            return if (modelClass.isAssignableFrom(ConfigViewModel::class.java)) {
+                ConfigViewModel(dataStore) as T
+            } else {
+                throw IllegalArgumentException()
+            }
+        }
     }
 }
