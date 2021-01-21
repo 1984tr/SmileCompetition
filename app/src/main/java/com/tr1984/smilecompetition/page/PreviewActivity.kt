@@ -56,18 +56,12 @@ class PreviewActivity : AppCompatActivity() {
         }, ContextCompat.getMainExecutor(this))
 
         imageProcessor = ImageProcessor(this)
-
-        lifecycleScope.launch {
-            val preferences = dataStore.data.first()
-            val key = preferencesKey<Long>("timer")
-            val timer = preferences[key] ?: 10000L
-            binding.progress.max = timer.toInt()
-        }
     }
 
     override fun onResume() {
         super.onResume()
         bindPreview()
+        loadConfig()
     }
 
     override fun onPause() {
@@ -119,6 +113,15 @@ class PreviewActivity : AppCompatActivity() {
         })
 
         provider.bindToLifecycle(this, cameraSelector, imageAnalysis)
+    }
+
+    private fun loadConfig() {
+        lifecycleScope.launch {
+            val preferences = dataStore.data.first()
+            val key = preferencesKey<Int>("duration")
+            val timer = preferences[key] ?: 15000
+            binding.progress.max = timer
+        }
     }
 
     private fun moveToCalendar(withInsert: Boolean) {
