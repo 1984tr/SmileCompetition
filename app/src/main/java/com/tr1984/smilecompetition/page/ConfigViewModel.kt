@@ -42,8 +42,8 @@ class ConfigViewModel(private val dataStore: DataStore<Preferences>, private val
         viewModelScope.launch {
             val preferences = dataStore.data.first()
             _duration.value = preferences[preferencesKey("duration")] ?: 15
-            _hour.value = preferences[preferencesKey("hour")] ?: 15
-            _minute.value = preferences[preferencesKey("minute")] ?: 15
+            _hour.value = preferences[preferencesKey("hour")] ?: 10
+            _minute.value = preferences[preferencesKey("minute")] ?: 0
             _ampm.value = preferences[preferencesKey("ampm")] ?: "am"
         }
     }
@@ -71,7 +71,15 @@ class ConfigViewModel(private val dataStore: DataStore<Preferences>, private val
         regist()
     }
 
-    private fun saveDataStore(key: String, value: Any) {
+    private fun saveDataStore(key: String, value: Int) {
+        viewModelScope.launch {
+            dataStore.edit {
+                it[preferencesKey(key)] = value
+            }
+        }
+    }
+
+    private fun saveDataStore(key: String, value: String) {
         viewModelScope.launch {
             dataStore.edit {
                 it[preferencesKey(key)] = value

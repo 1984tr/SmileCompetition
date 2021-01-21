@@ -150,7 +150,7 @@
 
         <LinearLayout
             android:id="@+id/hour_cont01"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:gravity="center"
@@ -175,7 +175,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:layout_marginLeft="16dp"
+                android:layout_marginLeft="8dp"
                 android:background="@drawable/selector_circle"
                 android:elevation="0dp"
                 android:fontFamily="@font/nanum"
@@ -189,7 +189,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:layout_marginLeft="16dp"
+                android:layout_marginLeft="8dp"
                 android:background="@drawable/selector_circle"
                 android:elevation="0dp"
                 android:fontFamily="@font/nanum"
@@ -203,7 +203,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:layout_marginLeft="16dp"
+                android:layout_marginLeft="8dp"
                 android:background="@drawable/selector_circle"
                 android:elevation="0dp"
                 android:fontFamily="@font/nanum"
@@ -217,7 +217,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:layout_marginLeft="16dp"
+                android:layout_marginLeft="8dp"
                 android:background="@drawable/selector_circle"
                 android:elevation="0dp"
                 android:fontFamily="@font/nanum"
@@ -231,7 +231,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:layout_marginLeft="16dp"
+                android:layout_marginLeft="8dp"
                 android:background="@drawable/selector_circle"
                 android:elevation="0dp"
                 android:fontFamily="@font/nanum"
@@ -271,7 +271,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:layout_marginLeft="16dp"
+                android:layout_marginLeft="8dp"
                 android:background="@drawable/selector_circle"
                 android:elevation="0dp"
                 android:fontFamily="@font/nanum"
@@ -285,7 +285,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:layout_marginLeft="16dp"
+                android:layout_marginLeft="8dp"
                 android:background="@drawable/selector_circle"
                 android:elevation="0dp"
                 android:fontFamily="@font/nanum"
@@ -299,7 +299,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:layout_marginLeft="16dp"
+                android:layout_marginLeft="8dp"
                 android:background="@drawable/selector_circle"
                 android:elevation="0dp"
                 android:fontFamily="@font/nanum"
@@ -313,7 +313,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:layout_marginLeft="16dp"
+                android:layout_marginLeft="8dp"
                 android:background="@drawable/selector_circle"
                 android:elevation="0dp"
                 android:fontFamily="@font/nanum"
@@ -327,7 +327,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:layout_marginLeft="16dp"
+                android:layout_marginLeft="8dp"
                 android:background="@drawable/selector_circle"
                 android:elevation="0dp"
                 android:fontFamily="@font/nanum"
@@ -382,7 +382,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:layout_marginLeft="16dp"
+                android:layout_marginLeft="8dp"
                 android:background="@drawable/selector_circle"
                 android:elevation="0dp"
                 android:fontFamily="@font/nanum"
@@ -396,7 +396,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:layout_marginLeft="16dp"
+                android:layout_marginLeft="8dp"
                 android:background="@drawable/selector_circle"
                 android:elevation="0dp"
                 android:fontFamily="@font/nanum"
@@ -410,7 +410,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:layout_marginLeft="16dp"
+                android:layout_marginLeft="8dp"
                 android:background="@drawable/selector_circle"
                 android:elevation="0dp"
                 android:fontFamily="@font/nanum"
@@ -424,7 +424,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:layout_marginLeft="16dp"
+                android:layout_marginLeft="8dp"
                 android:background="@drawable/selector_circle"
                 android:elevation="0dp"
                 android:fontFamily="@font/nanum"
@@ -438,7 +438,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:layout_marginLeft="16dp"
+                android:layout_marginLeft="8dp"
                 android:background="@drawable/selector_circle"
                 android:elevation="0dp"
                 android:fontFamily="@font/nanum"
@@ -478,7 +478,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:layout_marginLeft="16dp"
+                android:layout_marginLeft="8dp"
                 android:background="@drawable/selector_circle"
                 android:elevation="0dp"
                 android:fontFamily="@font/nanum"
@@ -492,7 +492,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:layout_marginLeft="16dp"
+                android:layout_marginLeft="8dp"
                 android:background="@drawable/selector_circle"
                 android:elevation="0dp"
                 android:fontFamily="@font/nanum"
@@ -506,7 +506,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:layout_marginLeft="16dp"
+                android:layout_marginLeft="8dp"
                 android:background="@drawable/selector_circle"
                 android:elevation="0dp"
                 android:fontFamily="@font/nanum"
@@ -520,7 +520,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:layout_marginLeft="16dp"
+                android:layout_marginLeft="8dp"
                 android:background="@drawable/selector_circle"
                 android:elevation="0dp"
                 android:fontFamily="@font/nanum"
@@ -534,7 +534,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:layout_marginLeft="16dp"
+                android:layout_marginLeft="8dp"
                 android:background="@drawable/selector_circle"
                 android:elevation="0dp"
                 android:fontFamily="@font/nanum"
