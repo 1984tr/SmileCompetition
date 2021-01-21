@@ -50,61 +50,86 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/duration_5s"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_marginTop="16dp"
+            android:background="@drawable/selector_circle"
+            android:elevation="0dp"
             android:fontFamily="@font/nanum"
-            android:text="5s"
-            android:textColor="@color/navy"
+            android:gravity="center"
+            android:onClick="@{() -> viewModel.changeDuration(5)}"
+            android:text="5"
+            android:textColor="@color/select_circle_color"
             android:textSize="24sp"
+            app:isSelected="@{viewModel.duration == 5}"
             app:layout_constraintStart_toStartOf="@id/label_duration"
             app:layout_constraintTop_toBottomOf="@id/label_duration" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/duration_7s"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_marginLeft="16dp"
+            android:background="@drawable/selector_circle"
+            android:elevation="0dp"
             android:fontFamily="@font/nanum"
-            android:text="7s"
-            android:textColor="@color/navy"
+            android:gravity="center"
+            android:onClick="@{() -> viewModel.changeDuration(7)}"
+            android:text="7"
+            android:textColor="@color/select_circle_color"
             android:textSize="24sp"
+            app:isSelected="@{viewModel.duration == 7}"
             app:layout_constraintStart_toEndOf="@id/duration_5s"
             app:layout_constraintTop_toTopOf="@id/duration_5s" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/duration_10s"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_marginLeft="16dp"
+            android:background="@drawable/selector_circle"
+            android:elevation="0dp"
             android:fontFamily="@font/nanum"
-            android:text="10s"
-            android:textColor="@color/navy"
+            android:gravity="center"
+            android:onClick="@{() -> viewModel.changeDuration(10)}"
+            android:text="10"
+            android:textColor="@color/select_circle_color"
             android:textSize="24sp"
+            app:isSelected="@{viewModel.duration == 10}"
             app:layout_constraintStart_toEndOf="@id/duration_7s"
             app:layout_constraintTop_toTopOf="@id/duration_7s" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/duration_15s"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_marginLeft="16dp"
+            android:background="@drawable/selector_circle"
+            android:elevation="0dp"
             android:fontFamily="@font/nanum"
-            android:text="10s"
-            android:textColor="@color/navy"
+            android:gravity="center"
+            android:onClick="@{() -> viewModel.changeDuration(15)}"
+            android:text="15"
+            android:textColor="@color/select_circle_color"
             android:textSize="24sp"
+            app:isSelected="@{viewModel.duration == 15}"
             app:layout_constraintStart_toEndOf="@id/duration_10s"
             app:layout_constraintTop_toTopOf="@id/duration_10s" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/duration_20s"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_marginLeft="16dp"
+            android:background="@drawable/selector_circle"
+            android:elevation="0dp"
             android:fontFamily="@font/nanum"
-            android:text="10s"
-            android:textColor="@color/navy"
+            android:gravity="center"
+            android:onClick="@{() -> viewModel.changeDuration(20)}"
+            android:text="20"
+            android:textColor="@color/select_circle_color"
             android:textSize="24sp"
+            app:isSelected="@{viewModel.duration == 20}"
             app:layout_constraintStart_toEndOf="@id/duration_15s"
             app:layout_constraintTop_toTopOf="@id/duration_15s" />
 
@@ -132,16 +157,6 @@
             app:layout_constraintEnd_toEndOf="@id/label_alarm"
             app:layout_constraintStart_toStartOf="@id/label_alarm"
             app:layout_constraintTop_toBottomOf="@id/label_alarm">
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/nanum"
-                android:gravity="center"
-                android:text="0"
-                android:textColor="@color/navy"
-                android:textSize="24sp" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
@@ -411,7 +426,7 @@
 
         <LinearLayout
             android:id="@+id/ampm_cont"
-            android:layout_width="0dp"
+            android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:orientation="horizontal"
