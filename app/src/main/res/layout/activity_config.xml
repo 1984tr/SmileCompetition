@@ -149,134 +149,195 @@
             app:layout_constraintTop_toBottomOf="@id/duration_15s" />
 
         <LinearLayout
-            android:id="@+id/hour_cont"
+            android:id="@+id/hour_cont01"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:gravity="center"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="@id/label_alarm"
             app:layout_constraintStart_toStartOf="@id/label_alarm"
             app:layout_constraintTop_toBottomOf="@id/label_alarm">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@drawable/selector_circle"
+                android:elevation="0dp"
                 android:fontFamily="@font/nanum"
                 android:gravity="center"
+                android:onClick="@{() -> viewModel.changeHour(1)}"
                 android:text="1"
-                android:textColor="@color/navy"
-                android:textSize="24sp" />
+                android:textColor="@color/select_circle_color"
+                android:textSize="24sp"
+                app:isSelected="@{viewModel.hour == 1}" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginLeft="16dp"
+                android:background="@drawable/selector_circle"
+                android:elevation="0dp"
                 android:fontFamily="@font/nanum"
                 android:gravity="center"
+                android:onClick="@{() -> viewModel.changeHour(2)}"
                 android:text="2"
-                android:textColor="@color/navy"
-                android:textSize="24sp" />
+                android:textColor="@color/select_circle_color"
+                android:textSize="24sp"
+                app:isSelected="@{viewModel.hour == 2}" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginLeft="16dp"
+                android:background="@drawable/selector_circle"
+                android:elevation="0dp"
                 android:fontFamily="@font/nanum"
                 android:gravity="center"
+                android:onClick="@{() -> viewModel.changeHour(3)}"
                 android:text="3"
-                android:textColor="@color/navy"
-                android:textSize="24sp" />
+                android:textColor="@color/select_circle_color"
+                android:textSize="24sp"
+                app:isSelected="@{viewModel.hour == 3}" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginLeft="16dp"
+                android:background="@drawable/selector_circle"
+                android:elevation="0dp"
                 android:fontFamily="@font/nanum"
                 android:gravity="center"
+                android:onClick="@{() -> viewModel.changeHour(4)}"
                 android:text="4"
-                android:textColor="@color/navy"
-                android:textSize="24sp" />
+                android:textColor="@color/select_circle_color"
+                android:textSize="24sp"
+                app:isSelected="@{viewModel.hour == 4}" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginLeft="16dp"
+                android:background="@drawable/selector_circle"
+                android:elevation="0dp"
                 android:fontFamily="@font/nanum"
                 android:gravity="center"
+                android:onClick="@{() -> viewModel.changeHour(5)}"
                 android:text="5"
-                android:textColor="@color/navy"
-                android:textSize="24sp" />
+                android:textColor="@color/select_circle_color"
+                android:textSize="24sp"
+                app:isSelected="@{viewModel.hour == 5}" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginLeft="16dp"
+                android:background="@drawable/selector_circle"
+                android:elevation="0dp"
                 android:fontFamily="@font/nanum"
                 android:gravity="center"
+                android:onClick="@{() -> viewModel.changeHour(6)}"
                 android:text="6"
-                android:textColor="@color/navy"
-                android:textSize="24sp" />
+                android:textColor="@color/select_circle_color"
+                android:textSize="24sp"
+                app:isSelected="@{viewModel.hour == 6}" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/hour_cont02"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="@id/hour_cont01"
+            app:layout_constraintStart_toStartOf="@id/hour_cont01"
+            app:layout_constraintTop_toBottomOf="@id/hour_cont01">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@drawable/selector_circle"
+                android:elevation="0dp"
                 android:fontFamily="@font/nanum"
                 android:gravity="center"
+                android:onClick="@{() -> viewModel.changeHour(7)}"
                 android:text="7"
-                android:textColor="@color/navy"
-                android:textSize="24sp" />
+                android:textColor="@color/select_circle_color"
+                android:textSize="24sp"
+                app:isSelected="@{viewModel.hour == 7}" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginLeft="16dp"
+                android:background="@drawable/selector_circle"
+                android:elevation="0dp"
                 android:fontFamily="@font/nanum"
                 android:gravity="center"
+                android:onClick="@{() -> viewModel.changeHour(8)}"
                 android:text="8"
-                android:textColor="@color/navy"
-                android:textSize="24sp" />
+                android:textColor="@color/select_circle_color"
+                android:textSize="24sp"
+                app:isSelected="@{viewModel.hour == 8}" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginLeft="16dp"
+                android:background="@drawable/selector_circle"
+                android:elevation="0dp"
                 android:fontFamily="@font/nanum"
                 android:gravity="center"
+                android:onClick="@{() -> viewModel.changeHour(9)}"
                 android:text="9"
-                android:textColor="@color/navy"
-                android:textSize="24sp" />
+                android:textColor="@color/select_circle_color"
+                android:textSize="24sp"
+                app:isSelected="@{viewModel.hour == 9}" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginLeft="16dp"
+                android:background="@drawable/selector_circle"
+                android:elevation="0dp"
                 android:fontFamily="@font/nanum"
                 android:gravity="center"
+                android:onClick="@{() -> viewModel.changeHour(10)}"
                 android:text="10"
-                android:textColor="@color/navy"
-                android:textSize="24sp" />
+                android:textColor="@color/select_circle_color"
+                android:textSize="24sp"
+                app:isSelected="@{viewModel.hour == 10}" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginLeft="16dp"
+                android:background="@drawable/selector_circle"
+                android:elevation="0dp"
                 android:fontFamily="@font/nanum"
                 android:gravity="center"
+                android:onClick="@{() -> viewModel.changeHour(11)}"
                 android:text="11"
-                android:textColor="@color/navy"
-                android:textSize="24sp" />
+                android:textColor="@color/select_circle_color"
+                android:textSize="24sp"
+                app:isSelected="@{viewModel.hour == 11}" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginLeft="16dp"
+                android:background="@drawable/selector_circle"
+                android:elevation="0dp"
                 android:fontFamily="@font/nanum"
                 android:gravity="center"
+                android:onClick="@{() -> viewModel.changeHour(12)}"
                 android:text="12"
-                android:textColor="@color/navy"
-                android:textSize="24sp" />
+                android:textColor="@color/select_circle_color"
+                android:textSize="24sp"
+                app:isSelected="@{viewModel.hour == 12}" />
+
         </LinearLayout>
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -289,170 +350,239 @@
             android:text=":"
             android:textColor="@color/navy"
             android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="@id/hour_cont"
-            app:layout_constraintStart_toStartOf="@id/hour_cont"
-            app:layout_constraintTop_toBottomOf="@id/hour_cont" />
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/hour_cont02"
+            app:layout_constraintStart_toStartOf="@id/hour_cont02"
+            app:layout_constraintTop_toBottomOf="@id/hour_cont02" />
 
         <LinearLayout
-            android:id="@+id/min_cont"
+            android:id="@+id/min_cont01"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:gravity="center"
             android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="@id/hour_cont"
-            app:layout_constraintStart_toStartOf="@id/hour_cont"
+            app:layout_constraintEnd_toEndOf="@id/hour_cont02"
+            app:layout_constraintStart_toStartOf="@id/hour_cont02"
             app:layout_constraintTop_toBottomOf="@id/label_clon">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@drawable/selector_circle"
+                android:elevation="0dp"
                 android:fontFamily="@font/nanum"
                 android:gravity="center"
+                android:onClick="@{() -> viewModel.changeMinute(0)}"
                 android:text="0"
-                android:textColor="@color/navy"
-                android:textSize="24sp" />
+                android:textColor="@color/select_circle_color"
+                android:textSize="24sp"
+                app:isSelected="@{viewModel.minute == 0}" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginLeft="16dp"
+                android:background="@drawable/selector_circle"
+                android:elevation="0dp"
                 android:fontFamily="@font/nanum"
                 android:gravity="center"
+                android:onClick="@{() -> viewModel.changeMinute(5)}"
                 android:text="5"
-                android:textColor="@color/navy"
-                android:textSize="24sp" />
+                android:textColor="@color/select_circle_color"
+                android:textSize="24sp"
+                app:isSelected="@{viewModel.minute == 5}" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginLeft="16dp"
+                android:background="@drawable/selector_circle"
+                android:elevation="0dp"
                 android:fontFamily="@font/nanum"
                 android:gravity="center"
+                android:onClick="@{() -> viewModel.changeMinute(10)}"
                 android:text="10"
-                android:textColor="@color/navy"
-                android:textSize="24sp" />
+                android:textColor="@color/select_circle_color"
+                android:textSize="24sp"
+                app:isSelected="@{viewModel.minute == 10}" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginLeft="16dp"
+                android:background="@drawable/selector_circle"
+                android:elevation="0dp"
                 android:fontFamily="@font/nanum"
                 android:gravity="center"
+                android:onClick="@{() -> viewModel.changeMinute(15)}"
                 android:text="15"
-                android:textColor="@color/navy"
-                android:textSize="24sp" />
+                android:textColor="@color/select_circle_color"
+                android:textSize="24sp"
+                app:isSelected="@{viewModel.minute == 15}" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginLeft="16dp"
+                android:background="@drawable/selector_circle"
+                android:elevation="0dp"
                 android:fontFamily="@font/nanum"
                 android:gravity="center"
+                android:onClick="@{() -> viewModel.changeMinute(20)}"
                 android:text="20"
-                android:textColor="@color/navy"
-                android:textSize="24sp" />
+                android:textColor="@color/select_circle_color"
+                android:textSize="24sp"
+                app:isSelected="@{viewModel.minute == 20}" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginLeft="16dp"
+                android:background="@drawable/selector_circle"
+                android:elevation="0dp"
                 android:fontFamily="@font/nanum"
                 android:gravity="center"
+                android:onClick="@{() -> viewModel.changeMinute(25)}"
                 android:text="25"
-                android:textColor="@color/navy"
-                android:textSize="24sp" />
+                android:textColor="@color/select_circle_color"
+                android:textSize="24sp"
+                app:isSelected="@{viewModel.minute == 25}" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/min_cont02"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="@id/min_cont01"
+            app:layout_constraintStart_toStartOf="@id/min_cont01"
+            app:layout_constraintTop_toBottomOf="@id/min_cont01">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@drawable/selector_circle"
+                android:elevation="0dp"
                 android:fontFamily="@font/nanum"
                 android:gravity="center"
+                android:onClick="@{() -> viewModel.changeMinute(30)}"
                 android:text="30"
-                android:textColor="@color/navy"
-                android:textSize="24sp" />
+                android:textColor="@color/select_circle_color"
+                android:textSize="24sp"
+                app:isSelected="@{viewModel.minute == 30}" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginLeft="16dp"
+                android:background="@drawable/selector_circle"
+                android:elevation="0dp"
                 android:fontFamily="@font/nanum"
                 android:gravity="center"
+                android:onClick="@{() -> viewModel.changeMinute(35)}"
                 android:text="35"
-                android:textColor="@color/navy"
-                android:textSize="24sp" />
+                android:textColor="@color/select_circle_color"
+                android:textSize="24sp"
+                app:isSelected="@{viewModel.minute == 35}" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginLeft="16dp"
+                android:background="@drawable/selector_circle"
+                android:elevation="0dp"
                 android:fontFamily="@font/nanum"
                 android:gravity="center"
+                android:onClick="@{() -> viewModel.changeMinute(40)}"
                 android:text="40"
-                android:textColor="@color/navy"
-                android:textSize="24sp" />
+                android:textColor="@color/select_circle_color"
+                android:textSize="24sp"
+                app:isSelected="@{viewModel.minute == 40}" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginLeft="16dp"
+                android:background="@drawable/selector_circle"
+                android:elevation="0dp"
                 android:fontFamily="@font/nanum"
                 android:gravity="center"
+                android:onClick="@{() -> viewModel.changeMinute(45)}"
                 android:text="45"
-                android:textColor="@color/navy"
-                android:textSize="24sp" />
+                android:textColor="@color/select_circle_color"
+                android:textSize="24sp"
+                app:isSelected="@{viewModel.minute == 45}" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginLeft="16dp"
+                android:background="@drawable/selector_circle"
+                android:elevation="0dp"
                 android:fontFamily="@font/nanum"
                 android:gravity="center"
+                android:onClick="@{() -> viewModel.changeMinute(50)}"
                 android:text="50"
-                android:textColor="@color/navy"
-                android:textSize="24sp" />
+                android:textColor="@color/select_circle_color"
+                android:textSize="24sp"
+                app:isSelected="@{viewModel.minute == 50}" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginLeft="16dp"
+                android:background="@drawable/selector_circle"
+                android:elevation="0dp"
                 android:fontFamily="@font/nanum"
                 android:gravity="center"
+                android:onClick="@{() -> viewModel.changeMinute(55)}"
                 android:text="55"
-                android:textColor="@color/navy"
-                android:textSize="24sp" />
+                android:textColor="@color/select_circle_color"
+                android:textSize="24sp"
+                app:isSelected="@{viewModel.minute == 55}" />
+
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/ampm_cont"
-            android:layout_width="160dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="32dp"
             android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="@id/hour_cont"
-            app:layout_constraintStart_toStartOf="@id/hour_cont"
-            app:layout_constraintTop_toBottomOf="@id/min_cont">
+            app:layout_constraintEnd_toEndOf="@id/min_cont02"
+            app:layout_constraintStart_toStartOf="@id/min_cont02"
+            app:layout_constraintTop_toBottomOf="@id/min_cont02">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:background="@drawable/selector_circle"
+                android:elevation="0dp"
                 android:fontFamily="@font/nanum"
                 android:gravity="center"
+                android:onClick='@{() -> viewModel.changeAmpm("AM")}'
                 android:text="AM"
-                android:textColor="@color/navy"
-                android:textSize="24sp" />
+                android:textColor="@color/select_circle_color"
+                android:textSize="24sp"
+                app:isSelected='@{viewModel.ampm == "AM"}' />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:layout_marginLeft="32dp"
+                android:background="@drawable/selector_circle"
+                android:elevation="0dp"
                 android:fontFamily="@font/nanum"
                 android:gravity="center"
+                android:onClick='@{() -> viewModel.changeAmpm("PM")}'
                 android:text="PM"
-                android:textColor="@color/navy"
-                android:textSize="24sp" />
+                android:textColor="@color/select_circle_color"
+                android:textSize="24sp"
+                app:isSelected='@{viewModel.ampm == "PM"}' />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
