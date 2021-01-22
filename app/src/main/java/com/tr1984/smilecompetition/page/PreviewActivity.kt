@@ -119,8 +119,8 @@ class PreviewActivity : AppCompatActivity() {
         lifecycleScope.launch {
             val preferences = dataStore.data.first()
             val key = preferencesKey<Int>("duration")
-            val timer = preferences[key] ?: 15000
-            binding.progress.max = timer
+            val timer = preferences[key] ?: 15
+            binding.progress.max = timer * 1000
         }
     }
 

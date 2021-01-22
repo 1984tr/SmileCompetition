@@ -1,5 +1,6 @@
 package com.tr1984.smilecompetition.page
 
+import android.util.Log
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
@@ -32,8 +33,8 @@ class ConfigViewModel(private val dataStore: DataStore<Preferences>, private val
             return _minute
         }
 
-    private val _ampm = MutableLiveData("am")
-    val ampm : LiveData<String>
+    private val _ampm = MutableLiveData(true)
+    val ampm : LiveData<Boolean>
         get() {
             return _ampm
         }
@@ -44,7 +45,8 @@ class ConfigViewModel(private val dataStore: DataStore<Preferences>, private val
             _duration.value = preferences[preferencesKey("duration")] ?: 15
             _hour.value = preferences[preferencesKey("hour")] ?: 10
             _minute.value = preferences[preferencesKey("minute")] ?: 0
-            _ampm.value = preferences[preferencesKey("ampm")] ?: "am"
+            _ampm.value = (preferences[preferencesKey<String>("ampm")] ?: "am") == "am"
+            Log.d("1984tr", "ampm : ${_ampm.value}, ${preferences[preferencesKey<String>("ampm")] }")
         }
     }
 
@@ -66,7 +68,7 @@ class ConfigViewModel(private val dataStore: DataStore<Preferences>, private val
     }
 
     fun changeAmpm(ampm: String) {
-        _ampm.value = ampm
+        _ampm.value = ampm.toLowerCase() == "am"
         saveDataStore("ampm", ampm.toLowerCase())
         regist()
     }
@@ -88,9 +90,9 @@ class ConfigViewModel(private val dataStore: DataStore<Preferences>, private val
     }
 
     private fun regist() {
-        val isAm = _ampm.value == "AM".toLowerCase()
+        val isAm = _ampm.value ?: true
         val hour = (_hour.value ?: 10) + (if (isAm) 0 else 12)
-        val min = _minute.value ?: 10
+        val min = _minute.value ?: 0
         alarmHelper.regist(hour, min)
     }
 }

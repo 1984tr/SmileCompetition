@@ -564,11 +564,11 @@
                 android:elevation="0dp"
                 android:fontFamily="@font/nanum"
                 android:gravity="center"
-                android:onClick='@{() -> viewModel.changeAmpm("AM")}'
+                android:onClick='@{() -> viewModel.changeAmpm("am")}'
                 android:text="AM"
                 android:textColor="@color/select_circle_color"
                 android:textSize="24sp"
-                app:isSelected='@{viewModel.ampm == "AM"}' />
+                app:isSelected="@{viewModel.ampm}" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="52dp"
@@ -578,11 +578,11 @@
                 android:elevation="0dp"
                 android:fontFamily="@font/nanum"
                 android:gravity="center"
-                android:onClick='@{() -> viewModel.changeAmpm("PM")}'
+                android:onClick='@{() -> viewModel.changeAmpm("pm")}'
                 android:text="PM"
                 android:textColor="@color/select_circle_color"
                 android:textSize="24sp"
-                app:isSelected='@{viewModel.ampm == "PM"}' />
+                app:isSelected="@{!viewModel.ampm}" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
