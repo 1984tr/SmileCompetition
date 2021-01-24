@@ -1,6 +1,5 @@
 package com.tr1984.smilecompetition.page
 
-import android.util.Log
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
@@ -9,25 +8,25 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.tr1984.smilecompetition.util.AlarmHelper
+import com.tr1984.smilecompetition.util.*
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 class ConfigViewModel(private val dataStore: DataStore<Preferences>, private val alarmHelper: AlarmHelper) : ViewModel() {
 
-    private val _duration = MutableLiveData(15)
+    private val _duration = MutableLiveData(DEFAULT_DURATION)
     val duration: LiveData<Int>
         get() {
             return _duration
         }
 
-    private val _hour = MutableLiveData(10)
+    private val _hour = MutableLiveData(DEFAULT_HOUR)
     val hour : LiveData<Int>
         get() {
             return _hour
         }
 
-    private val _minute = MutableLiveData(0)
+    private val _minute = MutableLiveData(DEFAULT_MINUTE)
     val minute : LiveData<Int>
         get() {
             return _minute
@@ -42,11 +41,10 @@ class ConfigViewModel(private val dataStore: DataStore<Preferences>, private val
     init {
         viewModelScope.launch {
             val preferences = dataStore.data.first()
-            _duration.value = preferences[preferencesKey("duration")] ?: 15
-            _hour.value = preferences[preferencesKey("hour")] ?: 10
-            _minute.value = preferences[preferencesKey("minute")] ?: 0
-            _ampm.value = (preferences[preferencesKey<String>("ampm")] ?: "am") == "am"
-            Log.d("1984tr", "ampm : ${_ampm.value}, ${preferences[preferencesKey<String>("ampm")] }")
+            _duration.value = preferences[preferencesKey("duration")] ?: DEFAULT_DURATION
+            _hour.value = preferences[preferencesKey("hour")] ?: DEFAULT_HOUR
+            _minute.value = preferences[preferencesKey("minute")] ?: DEFAULT_MINUTE
+            _ampm.value = (preferences[preferencesKey<String>("ampm")] ?: DEFAULT_AMPM) == DEFAULT_AMPM
         }
     }
 
@@ -68,7 +66,7 @@ class ConfigViewModel(private val dataStore: DataStore<Preferences>, private val
     }
 
     fun changeAmpm(ampm: String) {
-        _ampm.value = ampm.toLowerCase() == "am"
+        _ampm.value = ampm.toLowerCase() == DEFAULT_AMPM
         saveDataStore("ampm", ampm.toLowerCase())
         regist()
     }
@@ -91,8 +89,8 @@ class ConfigViewModel(private val dataStore: DataStore<Preferences>, private val
 
     private fun regist() {
         val isAm = _ampm.value ?: true
-        val hour = (_hour.value ?: 10) + (if (isAm) 0 else 12)
-        val min = _minute.value ?: 0
+        val hour = (_hour.value ?: DEFAULT_HOUR) + (if (isAm) 0 else 12)
+        val min = _minute.value ?: DEFAULT_MINUTE
         alarmHelper.regist(hour, min)
     }
 }

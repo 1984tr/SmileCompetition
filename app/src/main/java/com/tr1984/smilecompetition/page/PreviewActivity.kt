@@ -13,6 +13,7 @@ import androidx.datastore.preferences.core.preferencesKey
 import androidx.datastore.preferences.createDataStore
 import androidx.lifecycle.lifecycleScope
 import com.tr1984.smilecompetition.databinding.ActivityPreviewBinding
+import com.tr1984.smilecompetition.util.DEFAULT_DURATION
 import com.tr1984.smilecompetition.util.ImageProcessor
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
@@ -119,7 +120,7 @@ class PreviewActivity : AppCompatActivity() {
         lifecycleScope.launch {
             val preferences = dataStore.data.first()
             val key = preferencesKey<Int>("duration")
-            val timer = preferences[key] ?: 15
+            val timer = preferences[key] ?: DEFAULT_DURATION
             binding.progress.max = timer * 1000
         }
     }
