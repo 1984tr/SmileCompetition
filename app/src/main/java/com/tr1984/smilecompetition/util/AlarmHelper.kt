@@ -1,6 +1,7 @@
 package com.tr1984.smilecompetition.util
 
 import android.content.Context
+import android.util.Log
 import androidx.work.*
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -14,12 +15,15 @@ class AlarmHelper(private val context: Context) {
         workManager.enqueue(createWorkRequest(hourOfDay, minute))
     }
 
-    class DailyWorker(ctx: Context, params: WorkerParameters) : Worker(ctx, params) {
+    class DailyWorker(val context: Context, params: WorkerParameters) : Worker(context, params) {
+
         override fun doWork(): Result {
-            val hourOfDay = inputData.getInt("hourOfDay", 10)
-            val minute = inputData.getInt("minute", 0);
+            val hourOfDay = inputData.getInt("hourOfDay", DEFAULT_HOUR)
+            val minute = inputData.getInt("minute", DEFAULT_MINUTE)
             WorkManager.getInstance(applicationContext)
                 .enqueue(createWorkRequest(hourOfDay, minute))
+            val notifyHelper = NotifyHelper(context)
+            notifyHelper.alarm()
             return Result.success()
         }
     }

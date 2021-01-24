@@ -11,7 +11,7 @@ import androidx.core.app.NotificationCompat
 import com.tr1984.smilecompetition.R
 import com.tr1984.smilecompetition.page.MainActivity
 
-class NotifyHelper(context: Context) {
+class NotifyHelper(val context: Context) {
 
     lateinit var notificationManager: NotificationManager
 
@@ -20,7 +20,7 @@ class NotifyHelper(context: Context) {
         createNotificationChannel()
     }
 
-    fun notify(context: Context) {
+    fun alarm() {
         val pi = PendingIntent.getActivity(
             context,
             0,
