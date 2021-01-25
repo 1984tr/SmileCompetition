@@ -11,12 +11,11 @@ import androidx.core.app.NotificationCompat
 import com.tr1984.smilecompetition.R
 import com.tr1984.smilecompetition.page.MainActivity
 
-class NotifyHelper(val context: Context) {
+class NotifyHelper(private val context: Context) {
 
-    lateinit var notificationManager: NotificationManager
+    var notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
     init {
-        context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         createNotificationChannel()
     }
 
@@ -28,7 +27,7 @@ class NotifyHelper(val context: Context) {
             PendingIntent.FLAG_UPDATE_CURRENT
         )
         val builder =
-            NotificationCompat.Builder(context, "pretty_channel_id")
+            NotificationCompat.Builder(context, CHANNEL_ID)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setSmallIcon(R.drawable.ic_happy)
                 .setContentTitle("세상에서 젤 예쁜 당신!")
@@ -42,12 +41,12 @@ class NotifyHelper(val context: Context) {
     private fun createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val notificationChannel =
-                NotificationChannel(CHANNEL_ID, "Be pretty", NotificationManager.IMPORTANCE_HIGH)
+                NotificationChannel(CHANNEL_ID, "일반", NotificationManager.IMPORTANCE_HIGH)
                     .apply {
                         lightColor = Color.RED
                         enableLights(true)
                         enableVibration(true)
-                        description = "Be pretty alarms."
+                        description = "알람입니다."
                     }
             notificationManager.createNotificationChannel(notificationChannel)
         }
