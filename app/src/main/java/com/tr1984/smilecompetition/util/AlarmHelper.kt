@@ -9,10 +9,10 @@ import kotlin.math.min
 
 class AlarmHelper(private val context: Context) {
 
-    fun regist(hourOfDay: Int, minute: Int ) {
+    fun regist(hourOfDay: Int, minute: Int) {
         val workManager = WorkManager.getInstance(context)
         workManager.cancelAllWork()
-        workManager.enqueue(createWorkRequest(hourOfDay, minute))
+        workManager.enqueue(createWorkRequest(hourOfDay, minute, 0))
     }
 
     class DailyWorker(val context: Context, params: WorkerParameters) : Worker(context, params) {
@@ -21,7 +21,7 @@ class AlarmHelper(private val context: Context) {
             val hourOfDay = inputData.getInt("hourOfDay", DEFAULT_HOUR)
             val minute = inputData.getInt("minute", DEFAULT_MINUTE)
             WorkManager.getInstance(applicationContext)
-                .enqueue(createWorkRequest(hourOfDay, minute))
+                .enqueue(createWorkRequest(hourOfDay, minute, 2))
             val notifyHelper = NotifyHelper(context)
             notifyHelper.alarm()
             return Result.success()
@@ -30,11 +30,11 @@ class AlarmHelper(private val context: Context) {
 
     companion object {
 
-        private fun createWorkRequest(hourOfDay: Int, minute: Int) : WorkRequest {
+        private fun createWorkRequest(hourOfDay: Int, minute: Int, extra: Int) : WorkRequest {
             val currentDate = Calendar.getInstance()
             val dueDate = Calendar.getInstance()
             dueDate.set(Calendar.HOUR_OF_DAY, hourOfDay)
-            dueDate.set(Calendar.MINUTE, minute)
+            dueDate.set(Calendar.MINUTE, minute + extra)
             dueDate.set(Calendar.SECOND, 0)
             if (dueDate.before(currentDate)) {
                 dueDate.add(Calendar.HOUR_OF_DAY, 24)
@@ -43,7 +43,6 @@ class AlarmHelper(private val context: Context) {
             return OneTimeWorkRequestBuilder<DailyWorker>()
                 .setInitialDelay(timeDiff, TimeUnit.MILLISECONDS)
                 .setInputData(workDataOf("hourOfDay" to hourOfDay, "minute" to minute))
-                .addTag("Be_pretty")
                 .build()
         }
     }
