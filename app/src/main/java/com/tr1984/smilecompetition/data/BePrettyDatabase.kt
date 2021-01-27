@@ -3,25 +3,38 @@ package com.tr1984.smilecompetition.data
 import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
 import java.util.*
+import javax.inject.Singleton
 
 @Database(entities = [Smiling::class], version = 1)
 @TypeConverters(Converters::class)
 abstract class BePrettyDatabase : RoomDatabase() {
 
     abstract fun dao(): SmilingDao
+}
 
-    companion object {
+@InstallIn(ApplicationComponent::class)
+@Module
+object DatabaseModule {
 
-        @Volatile
-        private var instance: BePrettyDatabase? = null
+    @Provides
+    @Singleton
+    fun provideDatabase(@ApplicationContext appContext: Context): BePrettyDatabase {
+        return Room.databaseBuilder(
+            appContext,
+            BePrettyDatabase::class.java,
+            "be_pretty.db"
+        ).build()
+    }
 
-        fun getInstance(context: Context): BePrettyDatabase {
-            return instance ?: Room.databaseBuilder(
-                context.applicationContext,
-                BePrettyDatabase::class.java, "be_pretty.db"
-            ).build().also { instance = it }
-        }
+    @Provides
+    fun provideDao(database: BePrettyDatabase): SmilingDao {
+        return database.dao()
     }
 }
 
