@@ -9,41 +9,39 @@ import kotlin.math.min
 
 class AlarmHelper(private val context: Context) {
 
-    fun regist(hourOfDay: Int, minute: Int) {
+    fun regist(hourOfDay: Int, minute: Int, sec: Int) {
         val workManager = WorkManager.getInstance(context)
         workManager.cancelAllWork()
-        workManager.enqueue(createWorkRequest(hourOfDay, minute, 0))
+        workManager.enqueue(createWorkRequest(hourOfDay, minute, sec))
+    }
+
+    private fun createWorkRequest(hourOfDay: Int, minute: Int, sec: Int) : WorkRequest {
+        val currentDate = Calendar.getInstance()
+        val dueDate = Calendar.getInstance()
+        dueDate.set(Calendar.HOUR_OF_DAY, hourOfDay)
+        dueDate.set(Calendar.MINUTE, minute)
+        dueDate.set(Calendar.SECOND, sec)
+        if (dueDate.before(currentDate)) {
+            dueDate.add(Calendar.HOUR_OF_DAY, 24)
+        }
+
+        val timeDiff = dueDate.timeInMillis - currentDate.timeInMillis
+        return OneTimeWorkRequestBuilder<DailyWorker>()
+            .setInitialDelay(timeDiff, TimeUnit.MILLISECONDS)
+            .build()
     }
 
     class DailyWorker(val context: Context, params: WorkerParameters) : Worker(context, params) {
 
         override fun doWork(): Result {
-            val hourOfDay = inputData.getInt("hourOfDay", DEFAULT_HOUR)
-            val minute = inputData.getInt("minute", DEFAULT_MINUTE)
-            WorkManager.getInstance(applicationContext)
-                .enqueue(createWorkRequest(hourOfDay, minute, 2))
             val notifyHelper = NotifyHelper(context)
             notifyHelper.alarm()
-            return Result.success()
-        }
-    }
 
-    companion object {
-
-        private fun createWorkRequest(hourOfDay: Int, minute: Int, extra: Int) : WorkRequest {
-            val currentDate = Calendar.getInstance()
-            val dueDate = Calendar.getInstance()
-            dueDate.set(Calendar.HOUR_OF_DAY, hourOfDay)
-            dueDate.set(Calendar.MINUTE, minute + extra)
-            dueDate.set(Calendar.SECOND, 0)
-            if (dueDate.before(currentDate)) {
-                dueDate.add(Calendar.HOUR_OF_DAY, 24)
-            }
-            val timeDiff = dueDate.timeInMillis - currentDate.timeInMillis
-            return OneTimeWorkRequestBuilder<DailyWorker>()
-                .setInitialDelay(timeDiff, TimeUnit.MILLISECONDS)
-                .setInputData(workDataOf("hourOfDay" to hourOfDay, "minute" to minute))
+            val workRequest = OneTimeWorkRequestBuilder<DailyWorker>()
+                .setInitialDelay(24 * 60 * 60 * 1000, TimeUnit.MILLISECONDS)
                 .build()
+            WorkManager.getInstance(context).enqueue(workRequest)
+            return Result.success()
         }
     }
 }

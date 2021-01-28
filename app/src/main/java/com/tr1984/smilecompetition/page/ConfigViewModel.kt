@@ -91,6 +91,6 @@ class ConfigViewModel(private val dataStore: DataStore<Preferences>, private val
         val isAm = _ampm.value ?: true
         val hour = (_hour.value ?: DEFAULT_HOUR) + (if (isAm) 0 else 12)
         val min = _minute.value ?: DEFAULT_MINUTE
-        alarmHelper.regist(hour, min)
+        alarmHelper.regist(hour, min, 0)
     }
 }
