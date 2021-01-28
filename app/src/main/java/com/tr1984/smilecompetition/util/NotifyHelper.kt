@@ -29,9 +29,9 @@ class NotifyHelper(private val context: Context) {
         val builder =
             NotificationCompat.Builder(context, CHANNEL_ID)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
-                .setSmallIcon(R.drawable.ic_happy)
-                .setContentTitle("세상에서 젤 예쁜 당신!")
-                .setContentText("오늘도 예뻐질 시간이에요 :)")
+                .setSmallIcon(R.drawable.ic_happy_noti)
+                .setContentTitle("당신은 웃을 때 가장 예뻐요.")
+                .setContentText("오늘도 예뻐질 시간이에요 😀")
                 .setAutoCancel(true)
                 .setDefaults(NotificationCompat.DEFAULT_ALL)
                 .setContentIntent(pi)
