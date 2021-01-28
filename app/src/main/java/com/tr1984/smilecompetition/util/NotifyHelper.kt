@@ -10,10 +10,12 @@ import android.os.Build
 import androidx.core.app.NotificationCompat
 import com.tr1984.smilecompetition.R
 import com.tr1984.smilecompetition.page.MainActivity
+import kotlin.random.Random
 
 class NotifyHelper(private val context: Context) {
 
-    var notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+    var notificationManager =
+        context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
     init {
         createNotificationChannel()
@@ -26,12 +28,13 @@ class NotifyHelper(private val context: Context) {
             Intent(context, MainActivity::class.java),
             PendingIntent.FLAG_UPDATE_CURRENT
         )
+        val message = messages[Random.nextInt(messages.size)]
         val builder =
             NotificationCompat.Builder(context, CHANNEL_ID)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setSmallIcon(R.drawable.ic_happy_noti)
-                .setContentTitle("당신은 웃을 때 가장 예뻐요.")
-                .setContentText("오늘도 예뻐질 시간이에요 😀")
+                .setContentTitle(message.first)
+                .setContentText(message.second)
                 .setAutoCancel(true)
                 .setDefaults(NotificationCompat.DEFAULT_ALL)
                 .setContentIntent(pi)
@@ -54,5 +57,12 @@ class NotifyHelper(private val context: Context) {
 
     companion object {
         const val CHANNEL_ID = "be_pretty_channel_id"
+        val messages = listOf(
+            "오늘도 예뻐질 시간이에요 😀" to "환하게 웃어봐요 🌼",
+            "그거 아세요?" to "웃음이 면역력을 높여준데요! 💪",
+            "환하게 웃어봐요 😃" to "스트레스가 사라질거에요",
+            "행복해지려면 😍" to "활짝 웃어주세요 🌈",
+            "매일매일 미소를 지으면" to "점점 더 예뻐진데요 ❤️"
+        )
     }
 }
