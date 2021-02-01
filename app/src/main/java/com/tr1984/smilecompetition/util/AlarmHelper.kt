@@ -11,7 +11,6 @@ class AlarmHelper(private val context: Context) {
 
     fun regist(hourOfDay: Int, minute: Int, sec: Int) {
         val workManager = WorkManager.getInstance(context)
-        workManager.cancelAllWork()
         workManager.enqueue(createWorkRequest(hourOfDay, minute, sec))
     }
 
@@ -40,7 +39,7 @@ class AlarmHelper(private val context: Context) {
             val workRequest = OneTimeWorkRequestBuilder<DailyWorker>()
                 .setInitialDelay(24 * 60 * 60 * 1000, TimeUnit.MILLISECONDS)
                 .build()
-            WorkManager.getInstance(context).enqueue(workRequest)
+            WorkManager.getInstance(applicationContext).enqueue(workRequest)
             return Result.success()
         }
     }
