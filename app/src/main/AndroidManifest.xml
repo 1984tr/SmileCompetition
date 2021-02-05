@@ -55,6 +55,9 @@
             android:name="androidx.work.impl.WorkManagerInitializer"
             android:authorities="${applicationId}.workmanager-init"
             tools:node="remove"/>
+
+        <receiver android:name=".receiver.AlarmReceiver"
+            android:exported="false"/>
     </application>
 
 </manifest>
