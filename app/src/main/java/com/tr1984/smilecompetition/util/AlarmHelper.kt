@@ -1,46 +1,29 @@
 package com.tr1984.smilecompetition.util
 
+import android.app.AlarmManager
+import android.app.PendingIntent
 import android.content.Context
-import android.util.Log
-import androidx.work.*
+import android.content.Intent
+import com.tr1984.smilecompetition.receiver.AlarmReceiver
 import java.util.*
-import java.util.concurrent.TimeUnit
-import kotlin.math.min
 
 class AlarmHelper(private val context: Context) {
 
+    private val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+
     fun regist(hourOfDay: Int, minute: Int, sec: Int) {
-        val workManager = WorkManager.getInstance(context)
-        workManager.enqueue(createWorkRequest(hourOfDay, minute, sec))
-    }
+        val pi = PendingIntent.getBroadcast(
+            context, NotifyHelper.NOTIFICATION_ID, Intent(context, AlarmReceiver::class.java),
+            PendingIntent.FLAG_UPDATE_CURRENT)
+        alarmManager.cancel(pi)
 
-    private fun createWorkRequest(hourOfDay: Int, minute: Int, sec: Int) : WorkRequest {
-        val currentDate = Calendar.getInstance()
-        val dueDate = Calendar.getInstance()
-        dueDate.set(Calendar.HOUR_OF_DAY, hourOfDay)
-        dueDate.set(Calendar.MINUTE, minute)
-        dueDate.set(Calendar.SECOND, sec)
-        if (dueDate.before(currentDate)) {
-            dueDate.add(Calendar.HOUR_OF_DAY, 24)
-        }
+        val repeatInterval: Long = AlarmManager.INTERVAL_DAY
+        val timeInMillis = Calendar.getInstance().apply {
+            set(Calendar.HOUR_OF_DAY, hourOfDay)
+            set(Calendar.MINUTE, minute)
+            set(Calendar.SECOND, sec)
+        }.timeInMillis
 
-        val timeDiff = dueDate.timeInMillis - currentDate.timeInMillis
-        return OneTimeWorkRequestBuilder<DailyWorker>()
-            .setInitialDelay(timeDiff, TimeUnit.MILLISECONDS)
-            .build()
-    }
-
-    class DailyWorker(val context: Context, params: WorkerParameters) : Worker(context, params) {
-
-        override fun doWork(): Result {
-            val notifyHelper = NotifyHelper(context)
-            notifyHelper.alarm()
-
-            val workRequest = OneTimeWorkRequestBuilder<DailyWorker>()
-                .setInitialDelay(24 * 60 * 60 * 1000, TimeUnit.MILLISECONDS)
-                .build()
-            WorkManager.getInstance(applicationContext).enqueue(workRequest)
-            return Result.success()
-        }
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, timeInMillis, repeatInterval, pi)
     }
 }
