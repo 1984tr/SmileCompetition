@@ -16,7 +16,7 @@ class ConfigActivity : AppCompatActivity() {
     private lateinit var binding: ActivityConfigBinding
 
     private val dataStore = createDataStore("smile_config")
-    private val alarmHelper = AlarmHelper(this)
+    private val alarmHelper by lazy { AlarmHelper(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

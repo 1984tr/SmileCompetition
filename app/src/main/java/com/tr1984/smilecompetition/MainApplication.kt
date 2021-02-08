@@ -1,12 +1,7 @@
 package com.tr1984.smilecompetition
 
 import android.app.Application
-import androidx.work.Configuration
 
-class MainApplication : Application(), Configuration.Provider {
+class MainApplication : Application() {
 
-    override fun getWorkManagerConfiguration() =
-        Configuration.Builder()
-            .setMinimumLoggingLevel(android.util.Log.DEBUG)
-            .build()
 }
