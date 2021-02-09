@@ -36,6 +36,7 @@ class NotifyHelper(private val context: Context) {
                 .setContentTitle(message.first)
                 .setContentText(message.second)
                 .setAutoCancel(true)
+                .setWhen(System.currentTimeMillis())
                 .setDefaults(NotificationCompat.DEFAULT_ALL)
                 .setContentIntent(pi)
         notificationManager.notify(NOTIFICATION_ID, builder.build())
@@ -56,7 +57,7 @@ class NotifyHelper(private val context: Context) {
     }
 
     companion object {
-        const val NOTIFICATION_ID = 9876
+        const val NOTIFICATION_ID = 1211
         const val CHANNEL_ID = "be_pretty_channel_id"
         private val messages = listOf(
             "오늘도 예뻐질 시간이에요 😀" to "환하게 웃어봐요 🌼",

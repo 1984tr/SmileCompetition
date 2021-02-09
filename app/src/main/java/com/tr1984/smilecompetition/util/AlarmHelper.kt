@@ -13,21 +13,41 @@ class AlarmHelper(private val context: Context) {
     private val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
     fun regist(hourOfDay: Int, minute: Int, sec: Int) {
-        val pi = PendingIntent.getBroadcast(
-            context, NotifyHelper.NOTIFICATION_ID, Intent(context, AlarmReceiver::class.java),
-            PendingIntent.FLAG_UPDATE_CURRENT)
-        alarmManager.cancel(pi)
-        
-        var timeInMillis = Calendar.getInstance().apply {
+        cancelAlarm()
+
+        val calendar: Calendar = Calendar.getInstance().apply {
+            timeInMillis = System.currentTimeMillis()
             set(Calendar.HOUR_OF_DAY, hourOfDay)
             set(Calendar.MINUTE, minute)
             set(Calendar.SECOND, sec)
-        }.timeInMillis
-        if (Date(timeInMillis).before(Date(System.currentTimeMillis()))) {
-            timeInMillis += (24 * 60 * 60 * 1000)
         }
-        Log.d("1984tr", "$hourOfDay, $minute, $sec, ${Date(timeInMillis)}")
+        val timeInMillis =
+            if (Date(calendar.timeInMillis).before(Date(System.currentTimeMillis()))) {
+                calendar.timeInMillis + (24 * 60 * 60 * 1000)
+            } else {
+                calendar.timeInMillis
+            }
+        Log.d("1984tr", "$hourOfDay, $minute, $sec ,${Date(timeInMillis)}")
+        val pi =
+            PendingIntent.getBroadcast(context, 0, Intent(context, AlarmReceiver::class.java), 0)
+        alarmManager.setInexactRepeating(
+            AlarmManager.RTC_WAKEUP,
+            timeInMillis,
+            AlarmManager.INTERVAL_DAY,
+            pi
+        )
+    }
 
-        alarmManager.set(AlarmManager.RTC_WAKEUP, timeInMillis, pi)
+    private fun cancelAlarm() {
+        val intent = Intent(context, AlarmReceiver::class.java)
+        val pi = PendingIntent.getService(
+            context,
+            NotifyHelper.NOTIFICATION_ID,
+            intent,
+            PendingIntent.FLAG_NO_CREATE
+        )
+        if (pi != null) {
+            alarmManager.cancel(pi)
+        }
     }
 }
