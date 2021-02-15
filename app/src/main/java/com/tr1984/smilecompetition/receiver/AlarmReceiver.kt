@@ -12,9 +12,5 @@ class AlarmReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         val helper = NotifyHelper(context)
         helper.alarm()
-
-//        val alarmHelper = AlarmHelper(context)
-//        val cal = Calendar.getInstance()
-//        alarmHelper.regist(cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE) + 1, 0)
     }
 }

@@ -22,12 +22,10 @@ class NotifyHelper(private val context: Context) {
     }
 
     fun alarm() {
-        val pi = PendingIntent.getActivity(
-            context,
-            0,
-            Intent(context, MainActivity::class.java),
-            PendingIntent.FLAG_UPDATE_CURRENT
-        )
+        val pi =
+            PendingIntent.getActivity(context, 0, Intent(context, MainActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+            }, 0)
         val message = messages[Random.nextInt(messages.size)]
         val builder =
             NotificationCompat.Builder(context, CHANNEL_ID)
@@ -57,7 +55,7 @@ class NotifyHelper(private val context: Context) {
     }
 
     companion object {
-        const val NOTIFICATION_ID = 1211
+        const val NOTIFICATION_ID = 1234
         const val CHANNEL_ID = "be_pretty_channel_id"
         private val messages = listOf(
             "오늘도 예뻐질 시간이에요 😀" to "환하게 웃어봐요 🌼",

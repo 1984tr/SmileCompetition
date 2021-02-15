@@ -27,7 +27,7 @@ class BootReceiver: BroadcastReceiver() {
                     val ampm = (this[preferencesKey<String>("ampm")] ?: DEFAULT_AMPM) == DEFAULT_AMPM
 
                     val alarmHelper = AlarmHelper(context)
-                    alarmHelper.regist(hour + (if (ampm) 0 else 12), minute, 0)
+                    alarmHelper.add(hour + (if (ampm) 0 else 12), minute, 0)
                 }
             }
 
