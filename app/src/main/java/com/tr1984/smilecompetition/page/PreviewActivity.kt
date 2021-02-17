@@ -2,11 +2,11 @@ package com.tr1984.smilecompetition.page
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Environment
+import android.util.Log
 import android.util.Size
 import androidx.appcompat.app.AppCompatActivity
-import androidx.camera.core.CameraSelector
-import androidx.camera.core.ImageAnalysis
-import androidx.camera.core.Preview
+import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.datastore.preferences.core.preferencesKey
@@ -17,6 +17,8 @@ import com.tr1984.smilecompetition.util.DEFAULT_DURATION
 import com.tr1984.smilecompetition.util.ImageProcessor
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import java.io.File
+import java.util.*
 import kotlin.math.min
 
 class PreviewActivity : AppCompatActivity() {
@@ -33,6 +35,7 @@ class PreviewActivity : AppCompatActivity() {
     }
     private var cameraProvider: ProcessCameraProvider? = null
     private var imageProcessor: ImageProcessor? = null
+    private var imageCapture: ImageCapture? = null
     private var startTimestamp = Long.MAX_VALUE
 
     private val dataStore = createDataStore("smile_config")
@@ -42,6 +45,7 @@ class PreviewActivity : AppCompatActivity() {
         ActivityPreviewBinding.inflate(layoutInflater)
             .apply {
                 closeBtn.setOnClickListener { finish() }
+                cameraBtn.setOnClickListener { takePicture() }
                 calendarBtn.setOnClickListener { moveToCalendar(false) }
                 settingBtn.setOnClickListener { moveToSetting() }
             }.also {
@@ -79,10 +83,6 @@ class PreviewActivity : AppCompatActivity() {
         val provider = cameraProvider ?: return
         provider.unbindAll()
 
-        preview.setSurfaceProvider(binding.previewView.surfaceProvider)
-
-        provider.bindToLifecycle(this, cameraSelector, preview)
-
         val imageAnalysis = ImageAnalysis.Builder()
             .setTargetResolution(targetResolution)
             .build()
@@ -113,7 +113,13 @@ class PreviewActivity : AppCompatActivity() {
             }
         })
 
-        provider.bindToLifecycle(this, cameraSelector, imageAnalysis)
+        imageCapture = ImageCapture.Builder()
+            .setCaptureMode(ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY)
+            .setTargetRotation(binding.previewView.display.rotation)
+            .build()
+
+        provider.bindToLifecycle(this, cameraSelector, imageAnalysis, preview, imageCapture)
+        preview.setSurfaceProvider(binding.previewView.surfaceProvider)
     }
 
     private fun loadConfig() {
@@ -125,14 +131,55 @@ class PreviewActivity : AppCompatActivity() {
         }
     }
 
+    private fun takePicture() {
+        capture()
+    }
+
     private fun moveToCalendar(withInsert: Boolean) {
-        startActivity(Intent(this, CalendarActivity::class.java).apply {
-            putExtra("withInsert", withInsert)
-        })
+        if (withInsert) {
+            capture {
+                startActivity(Intent(this, CalendarActivity::class.java).apply {
+                    putExtra("withInsert", withInsert)
+                })
+            }
+        } else {
+            startActivity(Intent(this, CalendarActivity::class.java).apply {
+                putExtra("withInsert", withInsert)
+            })
+        }
     }
 
     private fun moveToSetting() {
         startActivity(Intent(this, ConfigActivity::class.java))
+    }
 
+    private fun capture(callback: (() -> Unit)? = null) {
+        val path = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        if (path != null) {
+            val cal = Calendar.getInstance()
+            val yy = cal.get(Calendar.YEAR)
+            val mm = cal.get(Calendar.MONTH) + 1
+            val dd = cal.get(Calendar.DATE)
+            val file = File.createTempFile("BP_$yy$mm$dd", ".jpg", path)
+            Log.d("1984tr", file.absolutePath)
+            val outputFileOptions =
+                ImageCapture.OutputFileOptions.Builder(file).build()
+            imageCapture?.takePicture(
+                outputFileOptions,
+                ContextCompat.getMainExecutor(this),
+                object : ImageCapture.OnImageSavedCallback {
+                    override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
+                        Log.d("1984tr", "savedUri: ${outputFileResults.savedUri}")
+                        callback?.invoke()
+                    }
+
+                    override fun onError(exception: ImageCaptureException) {
+                        exception.printStackTrace()
+                        callback?.invoke()
+                    }
+                }) ?: callback?.invoke()
+        } else {
+            callback?.invoke()
+        }
     }
 }

@@ -34,6 +34,17 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/camera_btn"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@null"
+            android:padding="6dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/btn_camera"
+            app:layout_constraintTop_toBottomOf="@id/close_btn"
+            app:layout_constraintEnd_toEndOf="@id/close_btn"/>
+
+        <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/calendar_btn"
             android:layout_width="48dp"
             android:layout_height="48dp"
@@ -41,8 +52,8 @@
             android:padding="6dp"
             android:scaleType="fitXY"
             android:src="@drawable/btn_calendar"
-            app:layout_constraintTop_toBottomOf="@id/close_btn"
-            app:layout_constraintEnd_toEndOf="@id/close_btn"/>
+            app:layout_constraintTop_toBottomOf="@id/camera_btn"
+            app:layout_constraintEnd_toEndOf="@id/camera_btn"/>
 
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/setting_btn"
