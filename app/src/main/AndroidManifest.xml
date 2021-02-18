@@ -45,6 +45,10 @@
             android:name=".page.ConfigActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".page.PhotoActivity"
+            android:screenOrientation="portrait" />
+
         <receiver android:name=".receiver.AlarmReceiver"/>
 
         <receiver android:name=".receiver.BootReceiver"

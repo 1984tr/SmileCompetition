@@ -160,7 +160,10 @@ class PreviewActivity : AppCompatActivity() {
             val yy = cal.get(Calendar.YEAR)
             val mm = cal.get(Calendar.MONTH) + 1
             val dd = cal.get(Calendar.DATE)
-            val file = File.createTempFile("BP_$yy$mm$dd", ".jpg", path)
+            val file = File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), "BP_$yy$mm$dd.jpg")
+            if (!file.exists()) {
+                file.createNewFile()
+            }
             Log.d("1984tr", file.absolutePath)
             val outputFileOptions =
                 ImageCapture.OutputFileOptions.Builder(file).build()

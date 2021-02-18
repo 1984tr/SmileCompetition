@@ -20,6 +20,12 @@ class CalendarViewModel(private val db: BePrettyDatabase, withInsert: Boolean) :
             return _histories
         }
 
+    private val _fileName = MutableLiveData("")
+    val fileName: LiveData<String>
+        get() {
+            return _fileName
+        }
+
     init {
         viewModelScope.launch {
             if (withInsert) {
@@ -54,6 +60,18 @@ class CalendarViewModel(private val db: BePrettyDatabase, withInsert: Boolean) :
                 _histories.value = ret
             }
         }
+    }
+
+    fun loadPicture(smiling: Smiling) {
+        val cal = Calendar.getInstance().apply {
+            timeInMillis = smiling.createdAt?.time ?: System.currentTimeMillis()
+        }
+        val yy = cal.get(Calendar.YEAR)
+        val mm = cal.get(Calendar.MONTH) + 1
+        val dd = cal.get(Calendar.DATE)
+        val fileName = "BP_$yy$mm$dd.jpg"
+        Log.d("1984tr", "fileName: $fileName")
+        _fileName.value = fileName
     }
 
     private suspend fun insertToday() {

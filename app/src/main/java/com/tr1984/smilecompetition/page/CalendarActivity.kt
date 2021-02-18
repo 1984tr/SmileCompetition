@@ -1,10 +1,14 @@
 package com.tr1984.smilecompetition.page
 
+import android.content.Intent
 import android.os.Bundle
+import android.os.Environment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DiffUtil
@@ -14,6 +18,7 @@ import com.tr1984.smilecompetition.data.BePrettyDatabase
 import com.tr1984.smilecompetition.data.Smiling
 import com.tr1984.smilecompetition.databinding.ActivityCalendarBinding
 import com.tr1984.smilecompetition.databinding.ItemCalendarBinding
+import java.io.File
 
 class CalendarActivity : AppCompatActivity() {
 
@@ -45,6 +50,14 @@ class CalendarActivity : AppCompatActivity() {
                     binding = it
                 }.root
         )
+
+        viewModel.fileName.observe(this, {
+            if (it.isNotEmpty()) {
+                startActivity(Intent(this@CalendarActivity, PhotoActivity::class.java).apply {
+                    putExtra("fileName", it)
+                })
+            }
+        })
     }
 
     class CalendarAdapter(
@@ -64,9 +77,11 @@ class CalendarActivity : AppCompatActivity() {
         }
 
         override fun onBindViewHolder(holder: Holder, position: Int) {
+            val item = getItem(position)
             with(holder.binding) {
                 lifecycleOwner = this@CalendarAdapter.lifecycleOwner
-                smiling = getItem(position)
+                smiling = item
+                root.setOnClickListener { viewModel.loadPicture(item) }
             }
         }
 
