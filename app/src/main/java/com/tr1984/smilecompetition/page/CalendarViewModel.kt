@@ -74,6 +74,10 @@ class CalendarViewModel(private val db: BePrettyDatabase, withInsert: Boolean) :
         _fileName.value = fileName
     }
 
+    fun toggle() {
+
+    }
+
     private suspend fun insertToday() {
         val smiling = Smiling(true, getToday())
         db.dao().insert(smiling)

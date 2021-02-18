@@ -43,6 +43,7 @@ class CalendarActivity : AppCompatActivity() {
                     viewModel = this@CalendarActivity.viewModel
 
                     btnClose.setOnClickListener { finish() }
+                    btnSwitch.setOnClickListener { viewModel.toggle() }
 
                     recyclerview.adapter =
                         CalendarAdapter(this@CalendarActivity, this@CalendarActivity.viewModel)
