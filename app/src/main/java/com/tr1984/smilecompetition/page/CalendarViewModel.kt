@@ -26,6 +26,12 @@ class CalendarViewModel(private val db: BePrettyDatabase, withInsert: Boolean) :
             return _fileName
         }
 
+    private val _isPhoto = MutableLiveData(false)
+    val isPhoto: LiveData<Boolean>
+        get() {
+            return _isPhoto
+        }
+
     init {
         viewModelScope.launch {
             if (withInsert) {
@@ -36,7 +42,9 @@ class CalendarViewModel(private val db: BePrettyDatabase, withInsert: Boolean) :
             if (histories.isNotEmpty()) {
                 val cal = Calendar.getInstance()
                 val start = throwPoint(histories[0].createdAt?.time ?: System.currentTimeMillis())
-                val end = throwPoint(histories[histories.size-1].createdAt?.time ?: System.currentTimeMillis())
+                val end = throwPoint(
+                    histories[histories.size - 1].createdAt?.time ?: System.currentTimeMillis()
+                )
                 val count = ceil(((end - start) / ONE_DAY).toDouble()).toInt() + 1
 
                 var day = start
@@ -67,7 +75,7 @@ class CalendarViewModel(private val db: BePrettyDatabase, withInsert: Boolean) :
             timeInMillis = smiling.createdAt?.time ?: System.currentTimeMillis()
         }
         val yy = cal.get(Calendar.YEAR)
-        val mm = cal.get(Calendar.MONTH) + 1
+        val mm = cal.get(Calendar.MONTH)
         val dd = cal.get(Calendar.DATE)
         val fileName = "BP_$yy$mm$dd.jpg"
         Log.d("1984tr", "fileName: $fileName")
@@ -75,7 +83,7 @@ class CalendarViewModel(private val db: BePrettyDatabase, withInsert: Boolean) :
     }
 
     fun toggle() {
-
+        _isPhoto.value = !(_isPhoto.value ?: false)
     }
 
     private suspend fun insertToday() {
@@ -83,11 +91,11 @@ class CalendarViewModel(private val db: BePrettyDatabase, withInsert: Boolean) :
         db.dao().insert(smiling)
     }
 
-    private fun getToday() : Date {
+    private fun getToday(): Date {
         return Date(throwPoint(System.currentTimeMillis()))
     }
 
-    private fun throwPoint(timeInMillis: Long) : Long {
+    private fun throwPoint(timeInMillis: Long): Long {
         return floor((timeInMillis / ONE_DAY).toDouble()).toLong() * ONE_DAY
     }
 

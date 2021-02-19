@@ -15,4 +15,8 @@ data class Smiling(
     fun date() : String {
         return SimpleDateFormat("MM/dd E").format(createdAt ?: Date())
     }
+
+    fun fileName() : String {
+        return SimpleDateFormat("BP_YYMMDD.jpg").format(createdAt ?: Date())
+    }
 }

@@ -2,13 +2,10 @@ package com.tr1984.smilecompetition.page
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Environment
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DiffUtil
@@ -18,7 +15,6 @@ import com.tr1984.smilecompetition.data.BePrettyDatabase
 import com.tr1984.smilecompetition.data.Smiling
 import com.tr1984.smilecompetition.databinding.ActivityCalendarBinding
 import com.tr1984.smilecompetition.databinding.ItemCalendarBinding
-import java.io.File
 
 class CalendarActivity : AppCompatActivity() {
 
@@ -43,7 +39,7 @@ class CalendarActivity : AppCompatActivity() {
                     viewModel = this@CalendarActivity.viewModel
 
                     btnClose.setOnClickListener { finish() }
-                    btnSwitch.setOnClickListener { viewModel.toggle() }
+                    btnSwitch.setOnClickListener { this@CalendarActivity.viewModel.toggle() }
 
                     recyclerview.adapter =
                         CalendarAdapter(this@CalendarActivity, this@CalendarActivity.viewModel)
@@ -82,6 +78,7 @@ class CalendarActivity : AppCompatActivity() {
             with(holder.binding) {
                 lifecycleOwner = this@CalendarAdapter.lifecycleOwner
                 smiling = item
+                isPhoto = viewModel.isPhoto
                 root.setOnClickListener { viewModel.loadPicture(item) }
             }
         }

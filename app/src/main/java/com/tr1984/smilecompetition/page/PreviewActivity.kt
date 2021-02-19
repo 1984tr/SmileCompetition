@@ -158,7 +158,7 @@ class PreviewActivity : AppCompatActivity() {
         if (path != null) {
             val cal = Calendar.getInstance()
             val yy = cal.get(Calendar.YEAR)
-            val mm = cal.get(Calendar.MONTH) + 1
+            val mm = cal.get(Calendar.MONTH)
             val dd = cal.get(Calendar.DATE)
             val file = File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), "BP_$yy$mm$dd.jpg")
             if (!file.exists()) {

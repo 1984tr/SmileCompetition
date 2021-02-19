@@ -8,6 +8,10 @@
         <import type="android.view.View" />
 
         <variable
+            name="isPhoto"
+            type="androidx.lifecycle.LiveData&lt;Boolean&gt;" />
+
+        <variable
             name="smiling"
             type="com.tr1984.smilecompetition.data.Smiling" />
 
@@ -15,7 +19,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:visibility="@{smiling.createdAt == null ? View.INVISIBLE : View.VISIBLE}">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/icon"
@@ -23,13 +28,34 @@
             android:layout_height="0dp"
             android:layout_marginTop="4dp"
             android:src="@drawable/ic_happy"
-            android:visibility="@{smiling.createdAt == null ? View.INVISIBLE : View.VISIBLE}"
+            android:visibility="@{isPhoto ? View.GONE : View.VISIBLE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="H, 1:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintWidth_percent="0.5" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/photo"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="4dp"
+            app:loadImage="@{smiling.fileName}"
+            android:visibility="@{isPhoto ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="H, 1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.5" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="icon, photo" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/date"
@@ -40,10 +66,9 @@
             android:text="@{smiling.date()}"
             android:textColor="@color/navy"
             android:textSize="12sp"
-            android:visibility="@{smiling.createdAt == null ? View.INVISIBLE : View.VISIBLE}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/icon"
+            app:layout_constraintTop_toBottomOf="@id/barrier_bottom"
             app:layout_constraintVertical_chainStyle="packed"
             tools:text="00/00" />
 
