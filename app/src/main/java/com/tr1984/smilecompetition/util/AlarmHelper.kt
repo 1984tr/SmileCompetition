@@ -37,11 +37,11 @@ class AlarmHelper(private val context: Context) {
             context,
             0,
             Intent(context, AlarmReceiver::class.java),
-            0
+            PendingIntent.FLAG_CANCEL_CURRENT
         )
         val alarmManager = context.getSystemService(ALARM_SERVICE) as? AlarmManager
         alarmManager?.run {
-            setRepeating(
+            setInexactRepeating(
                 AlarmManager.RTC_WAKEUP,
                 calendar.timeInMillis,
                 AlarmManager.INTERVAL_DAY,

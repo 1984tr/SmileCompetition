@@ -17,6 +17,12 @@ data class Smiling(
     }
 
     fun fileName() : String {
-        return SimpleDateFormat("BP_YYMMDD.jpg").format(createdAt ?: Date())
+        val cal = Calendar.getInstance().apply {
+            timeInMillis = (createdAt ?: Date()).time
+        }
+        val yy = cal.get(Calendar.YEAR)
+        val mm = cal.get(Calendar.MONTH)
+        val dd = cal.get(Calendar.DATE)
+        return "BP_$yy$mm$dd.jpg"
     }
 }
