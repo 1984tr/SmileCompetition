@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import java.io.File
 
@@ -22,6 +23,7 @@ fun loadImage(view: ImageView, fileName: String?) {
     Log.d("1984tr", "name: ${file}, ${file.exists()}")
     Glide.with(context)
         .load(file)
-        .apply(RequestOptions.circleCropTransform())
+        .diskCacheStrategy(DiskCacheStrategy.NONE)
+//        .apply(RequestOptions.circleCropTransform())
         .into(view)
 }
