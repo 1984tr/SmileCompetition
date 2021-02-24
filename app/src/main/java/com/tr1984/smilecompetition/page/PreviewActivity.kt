@@ -1,19 +1,25 @@
 package com.tr1984.smilecompetition.page
 
 import android.content.Intent
+import android.media.MediaScannerConnection
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.util.Log
 import android.util.Size
+import android.webkit.MimeTypeMap
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
+import androidx.core.net.toFile
 import androidx.datastore.preferences.core.preferencesKey
 import androidx.datastore.preferences.createDataStore
 import androidx.lifecycle.lifecycleScope
 import com.tr1984.smilecompetition.databinding.ActivityPreviewBinding
 import com.tr1984.smilecompetition.util.DEFAULT_DURATION
+import com.tr1984.smilecompetition.util.FileUtils
 import com.tr1984.smilecompetition.util.ImageProcessor
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
@@ -39,6 +45,7 @@ class PreviewActivity : AppCompatActivity() {
     private var startTimestamp = Long.MAX_VALUE
 
     private val dataStore = createDataStore("smile_config")
+    private var isDone = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,6 +72,7 @@ class PreviewActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        isDone = false
         bindPreview()
         loadConfig()
     }
@@ -101,7 +109,8 @@ class PreviewActivity : AppCompatActivity() {
                             binding.progress.max
                         )
                         binding.progress.progress = progress
-                        if (progress >= binding.progress.max) {
+                        if (progress >= binding.progress.max && !isDone) {
+                            isDone = true
                             moveToCalendar(true)
                             finish()
                         }
@@ -154,35 +163,43 @@ class PreviewActivity : AppCompatActivity() {
     }
 
     private fun capture(callback: (() -> Unit)? = null) {
-        val path = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-        if (path != null) {
-            val cal = Calendar.getInstance()
-            val yy = cal.get(Calendar.YEAR)
-            val mm = cal.get(Calendar.MONTH)
-            val dd = cal.get(Calendar.DATE)
-            val file = File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), "BP_$yy$mm$dd.jpg")
-            if (!file.exists()) {
-                file.createNewFile()
-            }
-            Log.d("1984tr", file.absolutePath)
-            val outputFileOptions =
-                ImageCapture.OutputFileOptions.Builder(file).build()
-            imageCapture?.takePicture(
-                outputFileOptions,
-                ContextCompat.getMainExecutor(this),
-                object : ImageCapture.OnImageSavedCallback {
-                    override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
-                        Log.d("1984tr", "savedUri: ${outputFileResults.savedUri}")
-                        callback?.invoke()
+        val cal = Calendar.getInstance()
+        val yy = cal.get(Calendar.YEAR)
+        val mm = cal.get(Calendar.MONTH)
+        val dd = cal.get(Calendar.DATE)
+        val photoFile = FileUtils.createFile(FileUtils.getOutputDirectory(this), "BP_$yy$mm$dd", ".jpg")
+        Log.d("1984tr", photoFile.absolutePath)
+        val outputFileOptions =
+            ImageCapture.OutputFileOptions.Builder(photoFile).build()
+        imageCapture?.takePicture(
+            outputFileOptions,
+            ContextCompat.getMainExecutor(this),
+            object : ImageCapture.OnImageSavedCallback {
+
+                override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
+                    val savedUri = outputFileResults.savedUri ?: Uri.fromFile(photoFile)
+                    Log.d("1984tr", "savedUri: ${outputFileResults.savedUri}")
+
+                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+                        sendBroadcast(Intent(android.hardware.Camera.ACTION_NEW_PICTURE, savedUri))
                     }
 
-                    override fun onError(exception: ImageCaptureException) {
-                        exception.printStackTrace()
-                        callback?.invoke()
+                    val mimeType = MimeTypeMap.getSingleton()
+                        .getMimeTypeFromExtension(savedUri.toFile().extension)
+                    MediaScannerConnection.scanFile(
+                        this@PreviewActivity,
+                        arrayOf(savedUri.toFile().absolutePath),
+                        arrayOf(mimeType)
+                    ) { _, uri ->
+                        Log.d("1984tr", "Image capture scanned into media store: $uri")
                     }
-                }) ?: callback?.invoke()
-        } else {
-            callback?.invoke()
-        }
+                    callback?.invoke()
+                }
+
+                override fun onError(exception: ImageCaptureException) {
+                    exception.printStackTrace()
+                    callback?.invoke()
+                }
+            }) ?: callback?.invoke()
     }
 }

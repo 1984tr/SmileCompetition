@@ -1,5 +1,6 @@
 package com.tr1984.smilecompetition.util
 
+import android.net.Uri
 import android.os.Environment
 import android.util.Log
 import android.view.View
@@ -19,11 +20,11 @@ fun setSelected(view: View, value: Boolean) {
 fun loadImage(view: ImageView, fileName: String?) {
     val name = fileName ?: return
     val context = view.context
-    val file = File(context.getExternalFilesDir(Environment.DIRECTORY_PICTURES), name)
-    Log.d("1984tr", "name: ${file}, ${file.exists()}")
+    val file = File(FileUtils.getOutputDirectory(context), name)
+    val uri = Uri.fromFile(file)
+    Log.d("1984tr", "name: ${uri}, ${file.exists()}")
     Glide.with(context)
-        .load(file)
-        .diskCacheStrategy(DiskCacheStrategy.NONE)
-//        .apply(RequestOptions.circleCropTransform())
+        .load(uri)
+        .apply(RequestOptions.circleCropTransform())
         .into(view)
 }
