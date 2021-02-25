@@ -30,7 +30,6 @@ class BootReceiver: BroadcastReceiver() {
                     alarmHelper.add(hour + (if (ampm) 0 else 12), minute, 0)
                 }
             }
-
         }
     }
 }

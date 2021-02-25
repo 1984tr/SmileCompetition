@@ -123,7 +123,6 @@ class PreviewActivity : AppCompatActivity() {
         })
 
         imageCapture = ImageCapture.Builder()
-            .setCaptureMode(ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY)
             .setTargetRotation(binding.previewView.display.rotation)
             .build()
 

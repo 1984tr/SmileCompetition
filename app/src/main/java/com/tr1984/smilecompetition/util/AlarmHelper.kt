@@ -33,39 +33,22 @@ class AlarmHelper(private val context: Context) {
             "1984tr",
             "$hourOfDay, $minute, $sec, ${calendar.timeInMillis}, ${Date(calendar.timeInMillis)}"
         )
-        val pi = PendingIntent.getBroadcast(
-            context,
-            0,
-            Intent(context, AlarmReceiver::class.java),
-            PendingIntent.FLAG_CANCEL_CURRENT
-        )
+        val pi = PendingIntent.getBroadcast(context, 0, Intent(context, AlarmReceiver::class.java), 0)
         val alarmManager = context.getSystemService(ALARM_SERVICE) as? AlarmManager
         alarmManager?.run {
-            setInexactRepeating(
-                AlarmManager.RTC_WAKEUP,
-                calendar.timeInMillis,
-                AlarmManager.INTERVAL_DAY,
-                pi
-            )
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pi)
+            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                setExact( AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pi)
+            } else {
+                set( AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pi)
             }
-
-            context.packageManager.setComponentEnabledSetting(
-                ComponentName(
-                    context,
-                    BootReceiver::class.java
-                ),
-                PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
-                PackageManager.DONT_KILL_APP
-            );
         }
     }
 
-    fun cancel() {
-        val intent = Intent(context, AlarmReceiver::class.java)
-        val sender = PendingIntent.getBroadcast(context, 0, intent, 0)
+    private fun cancel() {
+        val pi = PendingIntent.getBroadcast(context, 0, Intent(context, AlarmReceiver::class.java), 0)
         val alarmManager = context.getSystemService(ALARM_SERVICE) as? AlarmManager
-        alarmManager?.cancel(sender)
+        alarmManager?.cancel(pi)
     }
 }
