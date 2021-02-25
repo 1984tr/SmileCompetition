@@ -22,7 +22,7 @@ fun loadImage(view: ImageView, fileName: String?) {
     val context = view.context
     val file = File(FileUtils.getOutputDirectory(context), name)
     val uri = Uri.fromFile(file)
-    Log.d("1984tr", "name: ${uri}, ${file.exists()}")
+    Log.d("1984tr", "adapter name: ${uri}, ${file.exists()}")
     Glide.with(context)
         .load(uri)
         .apply(RequestOptions.circleCropTransform())
