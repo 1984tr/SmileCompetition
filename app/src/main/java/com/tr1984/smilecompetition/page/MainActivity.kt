@@ -5,12 +5,16 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.ktx.Firebase
 import com.tr1984.smilecompetition.databinding.ActivityMainBinding
+import com.tr1984.smilecompetition.util.Analytics
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Analytics.logEvent("page_main")
         setContentView(
                 ActivityMainBinding.inflate(layoutInflater)
                         .apply {
@@ -27,6 +31,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun actionSmile() {
+        Analytics.logEvent("click_action")
         if (!hasAllPermissions()) {
             requestPermissions()
             return

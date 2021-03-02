@@ -7,6 +7,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.tr1984.smilecompetition.databinding.ActivityPhotoBinding
+import com.tr1984.smilecompetition.util.Analytics
 import com.tr1984.smilecompetition.util.FileUtils
 import com.tr1984.smilecompetition.util.Logger
 import java.io.File
@@ -15,6 +16,7 @@ class PhotoActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Analytics.logEvent("page_photo")
         val binding = ActivityPhotoBinding.inflate(layoutInflater)
         setContentView(binding.root)
 

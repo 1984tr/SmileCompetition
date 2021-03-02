@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.tr1984.smilecompetition.databinding.ActivityConfigBinding
 import com.tr1984.smilecompetition.util.AlarmHelper
+import com.tr1984.smilecompetition.util.Analytics
 
 class ConfigActivity : AppCompatActivity() {
 
@@ -20,7 +21,7 @@ class ConfigActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        Analytics.logEvent("page_config")
         viewModel = ViewModelProvider(
             this,
             ConfigViewModelFactory(dataStore, alarmHelper)

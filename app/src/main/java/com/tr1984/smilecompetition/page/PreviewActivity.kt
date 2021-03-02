@@ -18,9 +18,7 @@ import androidx.datastore.preferences.core.preferencesKey
 import androidx.datastore.preferences.createDataStore
 import androidx.lifecycle.lifecycleScope
 import com.tr1984.smilecompetition.databinding.ActivityPreviewBinding
-import com.tr1984.smilecompetition.util.DEFAULT_DURATION
-import com.tr1984.smilecompetition.util.FileUtils
-import com.tr1984.smilecompetition.util.ImageProcessor
+import com.tr1984.smilecompetition.util.*
 import com.tr1984.smilecompetition.util.Logger
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
@@ -50,6 +48,7 @@ class PreviewActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Analytics.logEvent("page_preview")
         ActivityPreviewBinding.inflate(layoutInflater)
             .apply {
                 closeBtn.setOnClickListener { finish() }

@@ -15,6 +15,7 @@ import com.tr1984.smilecompetition.data.BePrettyDatabase
 import com.tr1984.smilecompetition.data.Smiling
 import com.tr1984.smilecompetition.databinding.ActivityCalendarBinding
 import com.tr1984.smilecompetition.databinding.ItemCalendarBinding
+import com.tr1984.smilecompetition.util.Analytics
 
 class CalendarActivity : AppCompatActivity() {
 
@@ -23,7 +24,7 @@ class CalendarActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        Analytics.logEvent("page_calendar")
         viewModel = ViewModelProvider(
             this,
             CalendarViewModelFactory(
@@ -39,7 +40,10 @@ class CalendarActivity : AppCompatActivity() {
                     viewModel = this@CalendarActivity.viewModel
 
                     btnClose.setOnClickListener { finish() }
-                    btnSwitch.setOnClickListener { this@CalendarActivity.viewModel.toggle() }
+                    btnSwitch.setOnClickListener {
+                        Analytics.logEvent("click_switch")
+                        this@CalendarActivity.viewModel.toggle()
+                    }
 
                     recyclerview.adapter =
                         CalendarAdapter(this@CalendarActivity, this@CalendarActivity.viewModel)
