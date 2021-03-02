@@ -26,9 +26,11 @@ class AlarmHelper(private val context: Context) {
             set(Calendar.MINUTE, minute)
             set(Calendar.SECOND, sec)
         }
-        if (calendar.before(Calendar.getInstance())) {
+
+        while (calendar.before(Calendar.getInstance())) {
             calendar.add(Calendar.DATE, 1)
         }
+        
         Log.d(
             "1984tr",
             "$hourOfDay, $minute, $sec, ${calendar.timeInMillis}, ${Date(calendar.timeInMillis)}"
