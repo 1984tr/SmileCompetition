@@ -23,7 +23,7 @@ class NotifyHelper(private val context: Context) {
     }
 
     fun alarm() {
-        Log.d("1984tr", "NotifyHelper.alarm()")
+        Logger.d("NotifyHelper.alarm()")
         val pi =
             PendingIntent.getActivity(context, 0, Intent(context, MainActivity::class.java).apply {
                 flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP

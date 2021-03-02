@@ -21,6 +21,7 @@ import com.tr1984.smilecompetition.databinding.ActivityPreviewBinding
 import com.tr1984.smilecompetition.util.DEFAULT_DURATION
 import com.tr1984.smilecompetition.util.FileUtils
 import com.tr1984.smilecompetition.util.ImageProcessor
+import com.tr1984.smilecompetition.util.Logger
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import java.io.File
@@ -167,7 +168,7 @@ class PreviewActivity : AppCompatActivity() {
         val mm = cal.get(Calendar.MONTH)
         val dd = cal.get(Calendar.DATE)
         val photoFile = FileUtils.createFile(FileUtils.getOutputDirectory(this), "BP_$yy$mm$dd", ".jpg")
-        Log.d("1984tr", photoFile.absolutePath)
+        Logger.d(photoFile.absolutePath)
         val outputFileOptions =
             ImageCapture.OutputFileOptions.Builder(photoFile).build()
         imageCapture?.takePicture(
@@ -177,7 +178,7 @@ class PreviewActivity : AppCompatActivity() {
 
                 override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
                     val savedUri = outputFileResults.savedUri ?: Uri.fromFile(photoFile)
-                    Log.d("1984tr", "savedUri: ${outputFileResults.savedUri}")
+                    Logger.d( "savedUri: ${outputFileResults.savedUri}")
 
                     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
                         sendBroadcast(Intent(android.hardware.Camera.ACTION_NEW_PICTURE, savedUri))
@@ -190,7 +191,7 @@ class PreviewActivity : AppCompatActivity() {
                         arrayOf(savedUri.toFile().absolutePath),
                         arrayOf(mimeType)
                     ) { _, uri ->
-                        Log.d("1984tr", "Image capture scanned into media store: $uri")
+                        Logger.d("Image capture scanned into media store: $uri")
                     }
                     callback?.invoke()
                 }

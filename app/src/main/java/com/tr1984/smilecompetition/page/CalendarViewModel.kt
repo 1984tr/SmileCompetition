@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tr1984.smilecompetition.data.BePrettyDatabase
 import com.tr1984.smilecompetition.data.Smiling
+import com.tr1984.smilecompetition.util.Logger
 import kotlinx.coroutines.launch
 import java.util.*
 import kotlin.math.ceil
@@ -78,7 +79,7 @@ class CalendarViewModel(private val db: BePrettyDatabase, withInsert: Boolean) :
         val mm = cal.get(Calendar.MONTH)
         val dd = cal.get(Calendar.DATE)
         val fileName = "BP_$yy$mm$dd.jpg"
-        Log.d("1984tr", "fileName: $fileName")
+        Logger.d("fileName: $fileName")
         _fileName.value = fileName
     }
 

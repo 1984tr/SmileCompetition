@@ -3,7 +3,6 @@ package com.tr1984.smilecompetition.receiver
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import androidx.datastore.preferences.core.preferencesKey
 import androidx.datastore.preferences.createDataStore
 import com.tr1984.smilecompetition.util.*
@@ -11,12 +10,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
-import java.util.*
 
 class AlarmReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
-        Log.d("1984tr", "AlarmReceiver.onReceive()")
+        Logger.d("AlarmReceiver.onReceive()")
         val notifyHelper = NotifyHelper(context)
         notifyHelper.alarm()
 

@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.tr1984.smilecompetition.databinding.ActivityPhotoBinding
 import com.tr1984.smilecompetition.util.FileUtils
+import com.tr1984.smilecompetition.util.Logger
 import java.io.File
 
 class PhotoActivity: AppCompatActivity() {
@@ -20,8 +21,8 @@ class PhotoActivity: AppCompatActivity() {
         val fileName = intent.getStringExtra("fileName")
         val file = File(FileUtils.getOutputDirectory(this), fileName)
         val uri = Uri.fromFile(file)
-        Log.d("1984tr", "name: ${uri}, ${file.exists()}")
-        Log.d("1984tr", "${file}")
+        Logger.d("name: ${uri}, ${file.exists()}")
+        Logger.d("$file")
         Glide.with(this).load(uri).into(binding.img)
     }
 }

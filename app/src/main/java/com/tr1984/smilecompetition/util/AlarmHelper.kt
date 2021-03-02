@@ -30,11 +30,8 @@ class AlarmHelper(private val context: Context) {
         while (calendar.before(Calendar.getInstance())) {
             calendar.add(Calendar.DATE, 1)
         }
-        
-        Log.d(
-            "1984tr",
-            "$hourOfDay, $minute, $sec, ${calendar.timeInMillis}, ${Date(calendar.timeInMillis)}"
-        )
+
+        Logger.d("$hourOfDay, $minute, $sec, ${calendar.timeInMillis}, ${Date(calendar.timeInMillis)}")
         val pi = PendingIntent.getBroadcast(context, 0, Intent(context, AlarmReceiver::class.java), 0)
         val alarmManager = context.getSystemService(ALARM_SERVICE) as? AlarmManager
         alarmManager?.run {
