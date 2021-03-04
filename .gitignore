@@ -13,3 +13,8 @@
 .externalNativeBuild
 .cxx
 local.properties
+firebase-debug.log
+app/release/app-release.aab
+.firebaserc
+firebase.json
+.firebase/hosting.cHVibGlj.cache
