@@ -3,6 +3,7 @@ package com.tr1984.smilecompetition.util
 import android.content.Context
 import android.os.Environment
 import java.io.File
+import java.util.*
 
 object FileUtils {
 
@@ -14,5 +15,12 @@ object FileUtils {
             mediaDir else appContext.filesDir
     }
 
-    fun createFile(baseFolder: File, name: String, extension: String) = File(baseFolder, name + extension)
+    fun createFile(baseFolder: File) = File(baseFolder, getFileName(Calendar.getInstance()))
+
+    fun getFileName(cal: Calendar) : String {
+        val yy = cal.get(Calendar.YEAR)
+        val mm = String.format("%02d", cal.get(Calendar.MONTH))
+        val dd = String.format("%02d", cal.get(Calendar.DATE))
+        return "BP_$yy$mm$dd.jpg"
+    }
 }
