@@ -3,6 +3,7 @@ package com.tr1984.smilecompetition.data
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
+import com.tr1984.smilecompetition.util.FileUtils
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -20,9 +21,6 @@ data class Smiling(
         val cal = Calendar.getInstance().apply {
             timeInMillis = (createdAt ?: Date()).time
         }
-        val yy = cal.get(Calendar.YEAR)
-        val mm = cal.get(Calendar.MONTH)
-        val dd = cal.get(Calendar.DATE)
-        return "BP_$yy$mm$dd.jpg"
+        return FileUtils.getFileName(cal)
     }
 }

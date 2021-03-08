@@ -25,6 +25,8 @@ fun loadImage(view: ImageView, fileName: String?) {
     Logger.d("adapter name: ${uri}, ${file.exists()}")
     Glide.with(context)
         .load(uri)
+        .skipMemoryCache(true)
+        .diskCacheStrategy(DiskCacheStrategy.NONE)
         .apply(RequestOptions.circleCropTransform())
         .into(view)
 }

@@ -1,12 +1,12 @@
 package com.tr1984.smilecompetition.page
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tr1984.smilecompetition.data.BePrettyDatabase
 import com.tr1984.smilecompetition.data.Smiling
+import com.tr1984.smilecompetition.util.FileUtils
 import com.tr1984.smilecompetition.util.Logger
 import kotlinx.coroutines.launch
 import java.util.*
@@ -75,10 +75,7 @@ class CalendarViewModel(private val db: BePrettyDatabase, withInsert: Boolean) :
         val cal = Calendar.getInstance().apply {
             timeInMillis = smiling.createdAt?.time ?: System.currentTimeMillis()
         }
-        val yy = cal.get(Calendar.YEAR)
-        val mm = cal.get(Calendar.MONTH)
-        val dd = cal.get(Calendar.DATE)
-        val fileName = "BP_$yy$mm$dd.jpg"
+        val fileName = FileUtils.getFileName(cal)
         Logger.d("fileName: $fileName")
         _fileName.value = fileName
     }

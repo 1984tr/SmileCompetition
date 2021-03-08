@@ -5,8 +5,6 @@ import android.media.MediaScannerConnection
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.os.Environment
-import android.util.Log
 import android.util.Size
 import android.webkit.MimeTypeMap
 import androidx.appcompat.app.AppCompatActivity
@@ -22,8 +20,8 @@ import com.tr1984.smilecompetition.util.*
 import com.tr1984.smilecompetition.util.Logger
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
-import java.io.File
 import java.util.*
+import java.util.concurrent.Executors
 import kotlin.math.min
 
 class PreviewActivity : AppCompatActivity() {
@@ -42,8 +40,6 @@ class PreviewActivity : AppCompatActivity() {
     private var imageProcessor: ImageProcessor? = null
     private var imageCapture: ImageCapture? = null
     private var startTimestamp = Long.MAX_VALUE
-
-    private val dataStore = createDataStore("smile_config")
     private var isDone = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -132,9 +128,11 @@ class PreviewActivity : AppCompatActivity() {
 
     private fun loadConfig() {
         lifecycleScope.launch {
+            val dataStore = createDataStore("smile_config")
             val preferences = dataStore.data.first()
             val key = preferencesKey<Int>("duration")
             val timer = preferences[key] ?: DEFAULT_DURATION
+            Logger.d("timer: $timer")
             binding.progress.max = timer * 1000
         }
     }
@@ -162,17 +160,18 @@ class PreviewActivity : AppCompatActivity() {
     }
 
     private fun capture(callback: (() -> Unit)? = null) {
-        val cal = Calendar.getInstance()
-        val yy = cal.get(Calendar.YEAR)
-        val mm = cal.get(Calendar.MONTH)
-        val dd = cal.get(Calendar.DATE)
-        val photoFile = FileUtils.createFile(FileUtils.getOutputDirectory(this), "BP_$yy$mm$dd", ".jpg")
+        var photoFile = FileUtils.createFile(FileUtils.getOutputDirectory(this))
+        if (photoFile.exists()) {
+            val deleted = photoFile.delete()
+            Logger.d( "savedUri: $deleted")
+            photoFile = FileUtils.createFile(FileUtils.getOutputDirectory(this))
+        }
         Logger.d(photoFile.absolutePath)
         val outputFileOptions =
             ImageCapture.OutputFileOptions.Builder(photoFile).build()
         imageCapture?.takePicture(
             outputFileOptions,
-            ContextCompat.getMainExecutor(this),
+            Executors.newSingleThreadExecutor(),
             object : ImageCapture.OnImageSavedCallback {
 
                 override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
